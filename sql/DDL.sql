@@ -28,6 +28,7 @@ CREATE TABLE Book(
   Language VARCHAR2(50)
   Description VARCHAR2(2000)
   Rating NUMBER
+  Page NUMBER
   Image VARCHAR2(1000) --default image
   CONSTRAINT book_pk PRIMARY KEY(ID)
   CONSTRAINT writer_fk FOREIGN KEY(Writer_ID) REFERENCES Writer(ID)
