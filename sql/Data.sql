@@ -6,15 +6,15 @@ INSERT INTO C##Bookshop.Writer(ID, Name, Description, Image) VALUES (103, 'র�
 INSERT INTO C##Bookshop.Writer(ID, Name, Description, Image) VALUES (104, 'সুনীল গঙ্গোপাধ্যায়', 'বিশ শতকের শেষাংশে জন্ম নেওয়া সব্যসাচী একজন বাঙ্গালি সাহিত্যিক সুনীল গঙ্গোপাধ্যায়। একাধারে কবি, ঔপন্যাসিক, ছোটগল্পকার, সম্পাদক, সাংবাদিক ও কলামিস্ট- এমন বহু পরিচয়ে সাহিত্যের অগণিত ক্ষেত্রে তিনি রেখেছেন তাঁর সুকুমার ছাপ। ', '/images/writer/defaultbook.jpg');
 
 --2 Publisher
-INSERT INTO C##Bookshop.Writer(Name, Address, Email, Password) VALUES ('পার্ল পাবলিকেশন্স', null, 'parl123@gmail.com', 'abcde');
-INSERT INTO C##Bookshop.Writer(Name, Address, Email, Password) VALUES ('কাকলী প্রকাশনী', null, 'kakoli123@gmail.com', 'abcdf');
-INSERT INTO C##Bookshop.Writer(Name, Address, Email, Password) VALUES ('প্রতীক প্রকাশনী', null, 'protik123@gmail.com', 'abcde');
-INSERT INTO C##Bookshop.Writer(Name, Address, Email, Password) VALUES ('সময় প্রকাশনী', null, 'somoy123@gmail.com', 'abcde');
-INSERT INTO C##Bookshop.Writer(Name, Address, Email, Password) VALUES ('অন্যপ্রকাশ', null, 'onnol123@gmail.com', 'abcde');
-INSERT INTO C##Bookshop.Writer(Name, Address, Email, Password) VALUES ('অনন্যা প্রকাশনী', null, 'ananna123@gmail.com', 'abcde');
-INSERT INTO C##Bookshop.Writer(Name, Address, Email, Password) VALUES ('অবসর প্রকাশনী', null, 'oboshor123@gmail.com', 'abcde');
-INSERT INTO C##Bookshop.Writer(Name, Address, Email, Password) VALUES ('আফসার ব্রাদার্স', null, 'afsar123@gmail.com', 'abcde');
-INSERT INTO C##Bookshop.Writer(Name, Address, Email, Password) VALUES ('নবযুগ প্রকাশনী', null, 'nobojug123@gmail.com', 'abcde');
+INSERT INTO C##Bookshop.Publisher(Name, Address, Email, Password) VALUES ('পার্ল পাবলিকেশন্স', null, 'parl123@gmail.com', 'abcde');
+INSERT INTO C##Bookshop.Publisher(Name, Address, Email, Password) VALUES ('কাকলী প্রকাশনী', null, 'kakoli123@gmail.com', 'abcdf');
+INSERT INTO C##Bookshop.Publisher(Name, Address, Email, Password) VALUES ('প্রতীক প্রকাশনী', null, 'protik123@gmail.com', 'abcde');
+INSERT INTO C##Bookshop.Publisher(Name, Address, Email, Password) VALUES ('সময় প্রকাশনী', null, 'somoy123@gmail.com', 'abcde');
+INSERT INTO C##Bookshop.Publisher(Name, Address, Email, Password) VALUES ('অন্যপ্রকাশ', null, 'onnol123@gmail.com', 'abcde');
+INSERT INTO C##Bookshop.Publisher(Name, Address, Email, Password) VALUES ('অনন্যা প্রকাশনী', null, 'ananna123@gmail.com', 'abcde');
+INSERT INTO C##Bookshop.Publisher(Name, Address, Email, Password) VALUES ('অবসর প্রকাশনী', null, 'oboshor123@gmail.com', 'abcde');
+INSERT INTO C##Bookshop.Publisher(Name, Address, Email, Password) VALUES ('আফসার ব্রাদার্স', null, 'afsar123@gmail.com', 'abcde');
+INSERT INTO C##Bookshop.Publisher(Name, Address, Email, Password) VALUES ('নবযুগ প্রকাশনী', null, 'nobojug123@gmail.com', 'abcde');
 
 --3 Book
 INSERT INTO C##Bookshop.Book(ID, Title, Writer_ID, Publisher, Date_Published, Genre, Quantity_in_stock, Quantity_sold, Price, Language, Description, Rating, Page, Image) VALUES (1, 'আমি তপু', 100, 'পার্ল পাবলিকেশন্স', 2005, 'শিশু-কিশোর উপন্যাস', 10, 0, 250, 'Bangla', null, 0, 123, '/images/books/defaultbook.jpg');
