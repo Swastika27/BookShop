@@ -28,7 +28,7 @@ CREATE TABLE Book (
 	Title VARCHAR2 ( 200 ) NOT NULL,
 	Writer_ID NUMBER,
 	Publisher VARCHAR2 ( 200 ),
-	Date_Published DATE,
+	Date_Published NUMBER,
 	Genre VARCHAR2 ( 50 ),
 	Quantity_in_stock NUMBER,
 	Quantity_sold NUMBER,
