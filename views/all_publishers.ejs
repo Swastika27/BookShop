@@ -17,7 +17,9 @@
     <h2>All publishers</h2>
     <% if(publishers.length > 0) { %>
         <% publishers.forEach(publisher => { %>
-            <p><%= publisher.NAME %></p>
+            <a href="/all_publishers/<%= publisher.NAME %>">
+                <p><%= publisher.NAME %></p>
+            </a>
         <% }) %>
     <% } %>
 </body>
