@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= books[0].TITLE %></title>
+    <link rel="stylesheet" href="/styles.css"> 
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Books</a></li>
+            <li><a href="/all_writers">Writers</a></li>
+            <li><a href="/all_publishers">Publishers</a></li>
+        </ul>
+    </nav>
+    <% if(books.length > 0) { %>
+        <% books.forEach(book => { %>
+                <h4><%= book.TITLE %></h4>
+                <p>Writer: <%= book.WRITER_NAME %></p>
+                <p>Publisher: <%= book.PUBLISHER %></p>
+                <p>Publication year: <%= book.DATE_PUBLISHED %></p>
+                <p>Genre: <%= book.GENRE %></p>
+                <p>Total page: <%= book.PAGE %></p>
+                <p>Price: <%= book.PRICE %></p>            
+        <% }) %>
+    <% } %>
+</body>
+</html>
