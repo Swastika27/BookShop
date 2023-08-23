@@ -11,6 +11,7 @@ body {
     font-size: medium;
 }
 
+
 p, h1, h2, h3, h4, h5,h6 a, ul {
     margin: 0;
     padding: 2;
@@ -106,4 +107,9 @@ textarea {
     display: block;
     margin: 40px 0;
     padding-left: 30px;
+}
+
+
+.single_book {
+    background-color: aquamarine;
 }
