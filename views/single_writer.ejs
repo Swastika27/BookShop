@@ -10,8 +10,8 @@
     <nav>
         <ul>
             <li><a href="/">Books</a></li>
-            <li><a href="/all_writers">Writers</a></li>
-            <li><a href="/all_publishers">Publishers</a></li>
+            <li><a href="/writers">Writers</a></li>
+            <li><a href="/publishers">Publishers</a></li>
         </ul>
     </nav>
     <!-- <% if(writers.length > 0) { %>
@@ -25,7 +25,7 @@
     <h4>Books by <%= writers[0].NAME %></h4>
     <% if(books.length > 0) { %>
         <% books.forEach(book => { %>
-            <a href="/all_books/<%= book.ID %>">
+            <a href="/books/<%= book.ID %>">
                 <h4><%= book.TITLE %></h4>
                 <p><%= book.WRITER_NAME %></p>
                 <p><%= book.PUBLISHER %></p></a>            

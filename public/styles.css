@@ -1,14 +1,19 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik&family=Tiro+Bangla&display=swap');
+
+
 body {
     max-width: 1200px;
     margin: 20px auto;
     padding: 0 20px;
-    font-family: 'Lucida Sans';
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Tiro Bangla', serif;
     font-size: medium;
 }
 
 p, h1, h2, h3, h4, h5,h6 a, ul {
-    margin: 3;
-    padding: 0;
+    margin: 0;
+    padding: 2;
     text-decoration: none;
     color: #222;
 }

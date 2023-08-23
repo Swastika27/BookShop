@@ -10,14 +10,14 @@
     <nav>
         <ul>
             <li><a href="/">Books</a></li>
-            <li><a href="/all_writers">Writers</a></li>
-            <li><a href="/all_publishers">Publishers</a></li>
+            <li><a href="/writers">Writers</a></li>
+            <li><a href="/publishers">Publishers</a></li>
         </ul>
     </nav>
     <h2>All writers</h2>
     <% if(writers.length > 0) { %>
         <% writers.forEach(writer => { %>
-            <a href="/all_writers/<%=writer.ID %>">
+            <a href="/writers/<%=writer.ID %>">
                 <p><%= writer.NAME %></p>
             </a>
         
