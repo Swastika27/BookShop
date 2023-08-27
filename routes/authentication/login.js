@@ -3,12 +3,11 @@ const bcypt = require('bcrypt');
 
 const Db_auth = require('../../database/customerAuthQuery');
 const authUtils = require('../../utils/authUtils');
-const { route } = require('./signup');
-const e = require('express');
 
 const router = express.Router({mergeParams: true});
 
 router.get('/', (req, res) => {
+    // console.log(req.query.token);
     if(req.user == null) { // not logged in
         return res.render('login', {
             title: 'Login',
@@ -32,11 +31,12 @@ router.post('/', async (req, res) => {
 
         data = await Db_auth.getLoginInfoFromEmail(req.body.email);
 
+        console.log('data', data);
         if(data.length == 0) {
             error.push('User not found');
         }
         else {
-            const isSamePassword = await bcypt.compare(req.body.password, data[0].PASSWORD);
+            const isSamePassword = await bcypt.compare(req.body.password, data[0].CUSTOMER_PASSWORD);
 
             if(isSamePassword) {
                 await authUtils.loginUser(res, data[0].ID);
@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
             res.render('login', {
                 title: 'Login',
                 user: null,
-                error: [],
+                errors: [],
                 form: {
                     email: req.body.email,
                     password: req.body.password
@@ -62,6 +62,7 @@ router.post('/', async (req, res) => {
         }
     }
     else { // already logged in
+        console.log(req.user);
         res.redirect('/');
     }
 });

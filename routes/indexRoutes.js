@@ -7,9 +7,9 @@ const book_router = require('./bookRoutes');
 const writer_router = require('./authorRoutes');
 const publisher_router = require('./publisherRoutes');
 
-const signup_router = require('./routes/authentication/signup');
-const login_router = require('./routes/authentication/login');
-const logout_router = require('./routes/authentication/logout');
+const signup_router = require('./authentication/signup');
+const login_router = require('./authentication/login');
+const logout_router = require('./authentication/logout');
 
 router.get('/', async(req, res) => {
     const all_books = await bookQuery.getAllBooks();

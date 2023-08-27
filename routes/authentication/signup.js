@@ -39,6 +39,8 @@ router.post('/', async (req, res) => {
             errors.push('Password must contain at least 6 characters');
         } 
 
+        console.log(req.body.name, req.body.password);
+
         if(errors.length > 0) {
             res.render('signup', {
                 title: 'signup',
@@ -64,7 +66,6 @@ router.post('/', async (req, res) => {
             )
             const salt = await bcrypt.genSalt();
             const hashedPassword = await bcrypt.hash(user.password, salt);
-            console.log('passord hashed');
             console.log('no error hashing');
             user.password = hashedPassword;
             let result = await Db_auth.createNewCustomer(user);
