@@ -4,7 +4,7 @@ const router = Router();
 
 router.get('/', async (req, res) => {
     const all_books = await books.getAllBooks();
-    res.render('index.ejs', {
+    res.render('all_books', {
         books: all_books
     });
 });

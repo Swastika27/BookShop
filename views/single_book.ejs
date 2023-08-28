@@ -9,20 +9,23 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/">Books</a></li>
+            <li><a href="/books">Books</a></li>
             <li><a href="/writers">Writers</a></li>
             <li><a href="/publishers">Publishers</a></li>
         </ul>
     </nav>
     <% if(books.length > 0) { %>
         <% books.forEach(book => { %>
+            <div class="single-book-detail">
+                <img src="/images/Kalbela.jpg" alt="kalbela" width="240" height="320">               
                 <h4><%= book.TITLE %></h4>
                 <p>Writer: <%= book.WRITER_NAME %></p>
                 <p>Publisher: <%= book.PUBLISHER %></p>
                 <p>Publication year: <%= book.DATE_PUBLISHED %></p>
                 <p>Genre: <%= book.GENRE %></p>
                 <p>Total page: <%= book.PAGE %></p>
-                <p>Price: <%= book.PRICE %></p>            
+                <p>Price: <%= book.PRICE %></p>   
+            </div>       
         <% }) %>
     <% } %>
 </body>

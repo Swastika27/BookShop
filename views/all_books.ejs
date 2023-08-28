@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= writers[0].NAME %></title>
+    <title>Home page</title>
     <link rel="stylesheet" href="/styles.css"> 
 </head>
 <body>
@@ -14,21 +14,11 @@
             <li><a href="/publishers">Publishers</a></li>
         </ul>
     </nav>
-    <!-- <% if(writers.length > 0) { %>
-        <% writers.forEach(writer => { %>
-            <h4><%= writer.NAME %></h4> 
-            <p><%= writer.DESCRIPTION %></p>          
-        <% }) %>
-    <% } %> -->
-    <img src="/images/default_writer.jpg" alt="default" width="260" height="320">
-    <h4><%= writers[0].NAME %></h4>
-    <p><%= writers[0].DESCRIPTION %></p>
-    <br>
-    <br>
-    <h4>Books by <%= writers[0].NAME %></h4>
+    <h2>All books</h2>
     <!-- <% if(books.length > 0) { %>
         <% books.forEach(book => { %>
             <a href="/books/<%= book.ID %>">
+                <img src="book.IMAGE" alt="default" width="260" height="320">
                 <h4><%= book.TITLE %></h4>
                 <p><%= book.WRITER_NAME %></p>
                 <p><%= book.PUBLISHER %></p></a>            
@@ -40,7 +30,7 @@
                 <% let count = 0; %>
                 <div class="all-books-line">
                     <% books.forEach(book => { %>
-                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                             <a href="/books/<%= book.ID %>">
                             <br>
                             <br>
@@ -48,7 +38,8 @@
                             <h4><%= book.TITLE %></h4>
                             <p><%= book.WRITER_NAME %></p>
                             <p><%= book.PUBLISHER %></p></a>   
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                             
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
                         <% count++; %>
                         <% if (count === 5) { %>
                             </div><div class="all-books-line">

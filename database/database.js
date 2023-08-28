@@ -18,7 +18,6 @@ async function startup() {
     } catch (err) {
         console.log('error while creating connection pool: ' , err);
     }
-    console.log('pool created');
 }
 
 async function shutdown() {
