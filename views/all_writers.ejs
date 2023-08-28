@@ -9,19 +9,47 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/">Books</a></li>
+            <li><a href="/books">Books</a></li>
             <li><a href="/writers">Writers</a></li>
             <li><a href="/publishers">Publishers</a></li>
         </ul>
     </nav>
     <h2>All writers</h2>
-    <% if(writers.length > 0) { %>
+    <!-- <% if(writers.length > 0) { %>
         <% writers.forEach(writer => { %>
             <a href="/writers/<%=writer.ID %>">
                 <p><%= writer.NAME %></p>
             </a>
         
         <% }) %>
-    <% } %>
+    <% } %> -->
+    <div class="all-writers-list">
+        <ul class="all-writers-grid">
+            <% if(writers.length > 0) { %>
+                <% let count = 0; %>
+                <div class="all-writers-line">
+                    <% writers.forEach(writer => { %>
+                            &nbsp; &nbsp; &nbsp; &nbsp; 
+                             
+                            <a href="/writers/<%=writer.ID %>">
+                            <br>
+                            <br>
+                            
+                            <img src="/images/default_writer.jpg" alt="default" width="150" height="200">
+                            <p><%= writer.NAME %></p>
+                            
+                            <!-- &nbsp; -->
+                            </a>
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                        <% count++; %>
+                        <% if (count === 5) { %>
+                            </div><div class="all-writers-line">
+                            <% count = 0; %>
+                        <% } %>
+                    <% }) %>
+                </div>
+            <% } %>
+        </ul>
+    </div>
 </body>
 </html>

@@ -9,18 +9,45 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/">Books</a></li>
+            <li><a href="/books">Books</a></li>
             <li><a href="/writers">Writers</a></li>
             <li><a href="/publishers">Publishers</a></li>
         </ul>
     </nav>
-    <h2>All publishers</h2>
-    <% if(publishers.length > 0) { %>
+    <h2 class="center-heading">All Publishers</h2>
+    <p class="publisher-heading2">Click on any publisher name to see all the books published by them...</p>
+    <!-- <% if(publishers.length > 0) { %>
         <% publishers.forEach(publisher => { %>
             <a href="/publishers/<%= publisher.NAME %>">
                 <p><%= publisher.NAME %></p>
             </a>
         <% }) %>
-    <% } %>
+    <% } %> -->
+    <!-- <div class="publisher-list">
+        <ul>
+            <% if(publishers.length > 0) { %>
+                <% publishers.forEach(publisher => { %>
+                    <li><a href="/publishers/<%= publisher.NAME %>"><%= publisher.NAME %></a></li>
+                <% }) %>
+            <% } %>
+        </ul>
+    </div> -->
+    <div class="publisher-list">
+        <ul class="publisher-grid">
+            <% if(publishers.length > 0) { %>
+                <% let count = 0; %>
+                <div class="publisher-line">
+                    <% publishers.forEach(publisher => { %>
+                        <li><a href="/publishers/<%= publisher.NAME %>"><%= publisher.NAME %></a></li>
+                        <% count++; %>
+                        <% if (count === 4) { %>
+                            </div><div class="publisher-line">
+                            <% count = 0; %>
+                        <% } %>
+                    <% }) %>
+                </div>
+            <% } %>
+        </ul>
+    </div>
 </body>
 </html>

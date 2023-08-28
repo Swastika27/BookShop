@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= books[0].TITLE %></title>
     <link rel="stylesheet" href="/styles.css"> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <nav>
@@ -17,15 +19,35 @@
     <div class="single_book">
         <% if(books.length > 0) { %>
             <% books.forEach(book => { %>
+                <div class="single-book-detail">
+                    <img src="/images/Kalbela.jpg" alt="kalbela" width="240" height="320">               
                     <h4><%= book.TITLE %></h4>
                     <p>Writer: <%= book.WRITER_NAME %></p>
                     <p>Publisher: <%= book.PUBLISHER %></p>
                     <p>Publication year: <%= book.DATE_PUBLISHED %></p>
                     <p>Genre: <%= book.GENRE %></p>
                     <p>Total page: <%= book.PAGE %></p>
-                    <p>Price: <%= book.PRICE %></p>            
+                    <p>Price: <%= book.PRICE %></p> 
+                    <button id="cart-post" class="login-button" onclick="addToCart();">Add to Cart</button>
+                    <button id="wishlist-post" class="login-button">Add to Wishlist</button>   
+                </div>       
             <% }) %>
         <% } %>
-    </div>   
+
+        
+    </div>
+    
+    
+    <script>        
+        let id = '<%= books[0].ID %>';
+        function addToCart() {
+            console.log('ajax');
+            $.ajax ( {
+                url: `/cart/${id}`,
+                type: 'POST'
+            });
+            console.log('add to cart');
+        }
+    </script>
 </body>
 </html>

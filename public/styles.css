@@ -1,18 +1,15 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Rubik&family=Tiro+Bangla&display=swap');
-
 
 body {
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 30px auto;
     padding: 0 20px;
     font-family: 'Rubik', sans-serif;
     font-family: 'Tiro Bangla', serif;
     font-size: medium;
 }
 
-
-p, h1, h2, h3, h4, h5,h6 a, ul {
+p, h1, h2, h3, h4, h5, h6, a, ul {
     margin: 0;
     padding: 2;
     text-decoration: none;
@@ -23,93 +20,333 @@ a {
     text-decoration: none;
 }
 
-nav {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    margin-bottom: 60px;
-    padding-bottom: 10px;
+    padding: 20px;
     border-bottom: 1px solid #ddd;
     text-transform: uppercase;
 }
 
-nav ul {
+.logo img {
+    width: 125px;
+}
+
+.navbar .actions {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
 }
 
-nav li {
-    list-style-type: none;
-    margin-left: 20px;
-}
-
-nav h1 {
-    font-size: 3em;
-}
-
-nav p, nav a {
-    color: #777;
-    font-weight: 300;
-}
-
-footer {
-    color: #777;
+.navbar .actions .search-bar {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin: 80px auto 20px;
+    flex: 1; /* Occupy remaining space */
+    /* padding-right: 90px; */
+    
 }
 
-h2 {
-    margin-bottom: 40px;
+.search-bar input[type="text"] {
+    margin-right: 10px;
+    padding: 8px; /* Increase padding to make the input box taller */
+    font-size: 16px; /* Increase font size for better visibility */
+    border: 1px solid #ddd; /* Add border to input for better separation */
+    border-radius: 4px; /* Add border radius for a slightly rounded look */
+    width: 500px; /* Adjust the width as needed */
 }
 
-h3 {
-    text-transform: capitalize;
-    margin-bottom: 8px;
+.auth-buttons {
+    padding-left: 180px;
+    display: flex;
+    gap: 10px;
 }
 
-.content {
-    margin-left: 20px;
-}
-
-.create-blog form {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.create-blog input,
-.create-blog textarea {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 8px;
-}
-
-.create-blog label {
-    display: block;
-    margin-top: 24px;
-}
-
-textarea {
-    height: 120px;
-}
-
-.create-blog button {
-    margin-top: 20px;
-    background: teal;
-    color: white;
-    padding: 6px;
-    border: 0;
-    font-size: 1.2em;
+.login-button,
+.signup-button {
+    padding: 8px 12px;
+    background-color: #230303;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-.blogs a {
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Vertically align the items */
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+nav ul li {
+    margin-right: 20px;
+    margin-top: 10px; /* Add margin to the top to separate from the navigation bar */
+}
+
+nav ul li a {
+    font-size: 25px; /* Adjust the font size as needed */
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 400px; /* Adjust the height as needed */
+    background: rgb(150, 240, 228); /* Change the background color */
+    border-radius: 10px;
+}
+
+.center h2 {
+    text-align: center;
+    /* padding: 0 0 20px 0; */
+    padding: 30px 0;
+    border-bottom: 1px solid silver;
+}
+
+.center form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.txt_field {
+    position: relative;
+    margin: 30px 0;
+}
+
+.txt_field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.txt_field label {
+    position: absolute;
+    top: 0; /* Change this to 0 */
+    left: 5px;
+    color: rgb(2, 33, 39);
+    font-size: 16px;
+    pointer-events: none;
+    /*transform: translateY(50%); /* Add this line */
+    transform: translateY(-50%);
+    transition: transform 0.3s, font-size 0.3s;
+    /* Add underline styles */
+     text-decoration: underline; 
+    text-decoration-color: #140000;
+}
+
+.txt_field input:focus + label,
+.txt_field input:valid + label {
+    transform: translateY(0) scale(0.9); /* Change translateY to 0 */
+}
+
+input[type="submit"] {
     display: block;
-    margin: 40px 0;
-    padding-left: 30px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #444;
+}
+
+.txt_field input:focus + label {
+    transform: translateY(-100%) translateX(-8px); /* Move label up and slightly left */
+    font-size: 16px; /* Adjust font size for the typed input */
+    color: blue; /* Change color when input is focused */
+}
+
+/*-------- Page of All Publishers ------------*/
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.center-heading {
+    text-align: center; /* Center the heading */
+    padding: 30px 0; /* Add padding above and below the heading */
+}
+
+.publisher-heading2{
+    text-align: center; /* Center the heading */
+    padding: 30px 0; /* Add padding above and below the heading */
+}
+
+.publisher-list li {
+    flex-basis: 25%;
+    box-sizing: border-box; /* Include padding and border in width */
+    padding: 10px; /* Add spacing around each publisher name */
+    transition: color 0.3s;
+}
+
+.publisher-list ul li {
+    font-size: 20px; /* You can adjust the value to your desired font size */
 }
 
 
-.single_book {
-    background-color: aquamarine;
+.publisher-list li::before {
+    content: "•"; /* Round bullet */
+    margin-right: 20px; /* Space between bullet and text */
 }
+
+
+.publisher-line {
+    display: flex;
+    width: 100%;
+}
+
+.publisher-list ul li:hover {
+    color: blue; /* Change the color to blue when hovering */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    text-decoration: underline; 
+}
+
+/* homepage design after login */
+.logoutbutton {
+    padding-left: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.logout-button {
+    padding: 8px 12px;
+    background-color: #230303;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cart-image img 
+{
+    /* padding-left: 30px;  */
+    width: 80px;
+}
+
+.navbar .actions .search-bar-hp {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1; /* Occupy remaining space */
+    padding-right: 110px;
+    
+}
+
+.search-bar-hp input[type="text"] {
+    margin-right: 10px;
+    padding: 8px; /* Increase padding to make the input box taller */
+    font-size: 16px; /* Increase font size for better visibility */
+    border: 1px solid #ddd; /* Add border to input for better separation */
+    border-radius: 4px; /* Add border radius for a slightly rounded look */
+    width: 500px; /* Adjust the width as needed */
+}
+
+/* single book */
+/* Style the book details */
+.single-book-detail {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.single-book-detail img {
+    width: 240px;
+    height: 320px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.single-book-detail h4 {
+    margin-top: 10px;
+}
+
+.single-book-detail p {
+    margin: 5px 0;
+}
+
+/* single writer */
+/* Style the writer details */
+.single-writer-detail {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.single-writer-detail img {
+    width: 240px;
+    height: 320px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.single-writer-detail h4 {
+    margin-top: 10px;
+}
+
+.single-writer-detail p {
+    margin: 5px 0;
+}
+
+/* all books */
+.all-books-list li {
+    flex-basis: 25%;
+    box-sizing: border-box; /* Include padding and border in width */
+    padding: 100px; /* Add spacing around each publisher name */
+    transition: color 0.3s;
+}
+
+.all-books-line {
+    /* display: flex;
+    width: 100%; */
+    display: flex;
+    width: 100%;
+    /* justify-content: space-between;  */
+    margin: 0 -10px; /* Add margin to compensate for the spacing */
+    flex-wrap: wrap; 
+}
+
+/* all writers */
+.all-writers-list li {
+    flex-basis: 25%;
+    box-sizing: border-box; 
+    padding: 100px; 
+    /* padding-left: 2000px; */
+    transition: color 0.3s; 
+}
+
+.all-writers-line {
+    display: flex;
+    width: 100%;
+    /* justify-content: space-between;  */
+    margin: 0 -10px; 
+    flex-wrap: wrap; 
+} 
+
+
+

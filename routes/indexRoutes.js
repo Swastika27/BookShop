@@ -11,12 +11,21 @@ const signup_router = require('./authentication/signup');
 const login_router = require('./authentication/login');
 const logout_router = require('./authentication/logout');
 
+const cart_router = require('./cartRoutes');
+
 router.get('/', async(req, res) => {
     const all_books = await bookQuery.getAllBooks();
     res.render('index.ejs', {
         books: all_books
     });
 });
+
+router.get('/homepage', async(req, res) => {
+    const all_books = await bookQuery.getAllBooks();
+    res.render('homepage.ejs', {
+        books: all_books
+    });
+})
 
 router.use('/books', book_router);
 router.use('/writers', writer_router);
@@ -25,6 +34,8 @@ router.use('/publishers', publisher_router);
 router.use('/signup', signup_router);
 router.use('/login', login_router);
 router.use('/logout', logout_router);
+
+router.use('/cart', cart_router);
 
 module.exports = router;
 

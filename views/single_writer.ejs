@@ -9,7 +9,7 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/">Books</a></li>
+            <li><a href="/books">Books</a></li>
             <li><a href="/writers">Writers</a></li>
             <li><a href="/publishers">Publishers</a></li>
         </ul>
@@ -20,16 +20,44 @@
             <p><%= writer.DESCRIPTION %></p>          
         <% }) %>
     <% } %> -->
+    <img src="/images/default_writer.jpg" alt="default" width="260" height="320">
     <h4><%= writers[0].NAME %></h4>
     <p><%= writers[0].DESCRIPTION %></p>
+    <br>
+    <br>
     <h4>Books by <%= writers[0].NAME %></h4>
-    <% if(books.length > 0) { %>
+    <!-- <% if(books.length > 0) { %>
         <% books.forEach(book => { %>
             <a href="/books/<%= book.ID %>">
                 <h4><%= book.TITLE %></h4>
                 <p><%= book.WRITER_NAME %></p>
                 <p><%= book.PUBLISHER %></p></a>            
         <% }) %>
-    <% } %>
+    <% } %> -->
+    <div class="all-books">
+        <ul class="all-books-grid">
+            <% if(books.length > 0) { %>
+                <% let count = 0; %>
+                <div class="all-books-line">
+                    <% books.forEach(book => { %>
+                             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <a href="/books/<%= book.ID %>">
+                            <br>
+                            <br>
+                            <img src="/images/Kalbela.jpg" alt="default" width="150" height="200">
+                            <h4><%= book.TITLE %></h4>
+                            <p><%= book.WRITER_NAME %></p>
+                            <p><%= book.PUBLISHER %></p></a>   
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <% count++; %>
+                        <% if (count === 5) { %>
+                            </div><div class="all-books-line">
+                            <% count = 0; %>
+                        <% } %>
+                    <% }) %>
+                </div>
+            <% } %>
+        </ul>
+    </div>
 </body>
 </html>
