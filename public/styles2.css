@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&family=Tiro+Bangla&display=swap');
+
+body {
+    width: auto;
+    margin: 30px auto;
+    /* padding: 0 20px; */
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Tiro Bangla', serif;
+    font-size: medium;
+    background-color: #f1f2f4;
+}
+p, h1, h2, h3, h4, h5, h6, a, ul, li {
+    margin: 0;
+    padding: 2;
+    text-decoration: none;
+    color: #222;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    box-shadow: #222;
+}
+div {
+    display: block;
+}
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo img {
+    width: 125px;
+}
+button {
+    padding: 8px 12px;
+    margin: 10px;
+    margin-left: 0;
+    background-color: #266398;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #183a58;
+}
+.lower-line a:hover {
+    color: #266398;
+    text-decoration: underline;
+}
+
+.search-bar input[type="text"] {
+    margin: 10px;
+    padding: 10px; /* Increase padding to make the input box taller */
+    font-size: 16px; /* Increase font size for better visibility */
+    border: 1px solid #0f0f0f; /* Add border to input for better separation */
+    border-radius: 4px; /* Add border radius for a slightly rounded look */
+    width: 500px; /* Adjust the width as needed */
+}
+
+.upper-line {
+    width: 1200px;
+    display: flex;
+    justify-content: space-around;
+}
+.lower-line {
+    width: 1200px;
+    font-size: large;
+}
+
+ul{
+    text-decoration: none;
+    display: flex;
+    justify-content: start; 
+}
+
+li {
+    list-style: none;
+    margin: 10px;
+}
+
+nav {
+    border-bottom: 1px solid #222;
+}
+ 
+.header-section {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 8px;
+}
+.display-books {
+    background-color: #ffffff;
+    margin: 15px;
+    margin-top: 0px;
+    padding-top: 15px;
+    width: 1150px;
+    border-radius: 8px;
+
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    gap: 20px;
+}
+.book-header {
+    background-color: #ffffff;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    padding-top: 15px;
+    padding-left: 15px;
+    width: 1150px;
+    font-size: large;
+    border-radius: 8px;
+}
+.single-book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: small;
+    /* justify-content: center;
+    height: 300px; */
+}
+.single-book:hover {
+    border: 1px solid #183a58;
+    border-radius: 8px;
+}
+.filter-section {
+    margin: 15px;
+    
+    border-radius: 20px;
+    /* background-color:#ffffff; */
+    width: 300px;
+}
+
+.main-section {
+    padding-top: 50px;
+    width: auto;
+    display: flex;
+    border-radius: 8px;
+}
+.display-publishers {
+    background-color: #ffffff;
+    margin: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    width: 1150px;
+
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px;
+}
+.single-publisher {
+    width: 250px;
+    padding: 15px;
+}

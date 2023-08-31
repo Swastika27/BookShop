@@ -4,36 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All publishers</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles2.css">
 </head>
 <body>
-    <nav>
+    <!-- <nav>
         <ul>
             <li><a href="/books">Books</a></li>
             <li><a href="/writers">Writers</a></li>
             <li><a href="/publishers">Publishers</a></li>
         </ul>
-    </nav>
-    <h2 class="center-heading">All Publishers</h2>
-    <p class="publisher-heading2">Click on any publisher name to see all the books published by them...</p>
-    <!-- <% if(publishers.length > 0) { %>
-        <% publishers.forEach(publisher => { %>
-            <a href="/publishers/<%= publisher.NAME %>">
-                <p><%= publisher.NAME %></p>
-            </a>
-        <% }) %>
-    <% } %> -->
-    <!-- <div class="publisher-list">
-        <ul>
-            <% if(publishers.length > 0) { %>
-                <% publishers.forEach(publisher => { %>
-                    <li><a href="/publishers/<%= publisher.NAME %>"><%= publisher.NAME %></a></li>
-                <% }) %>
-            <% } %>
-        </ul>
-    </div> -->
-    <div class="publisher-list">
-        <ul class="publisher-grid">
+    </nav> -->
+    <div class="header-section">
+        <div class="lower-line">
+            <nav>
+                <ul>
+                    <li><a href="/books">Books</a></li>
+                    <li><a href="/writers">Writers</a></li>
+                    <li><a href="/publishers">Publishers</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="center">
+        <div><h2>All Publishers</h2></div>
+        <div>Click on any publisher name to see all the books published by them...</div>
+    </div>
+    
+    <div class="main-section">
+        <div class="filter-section">
+            <div>genre filter</div>
+            <div>author filter</div>
+            <div>publisher filter</div>
+            <div>price filter</div>
+            <div>rate filter</div>
+        </div>
+
+        <div class="items-section">
+        <!-- <ul class="publisher-grid">
             <% if(publishers.length > 0) { %>
                 <% let count = 0; %>
                 <div class="publisher-line">
@@ -47,7 +55,17 @@
                     <% }) %>
                 </div>
             <% } %>
-        </ul>
+        </ul> -->
+            <div class="display-publishers">
+                <% if(publishers.length > 0) { %>
+                    <% publishers.forEach(publisher => { %>
+                        <div class="single-publisher">
+                            <a href="/publishers/<%= publisher.NAME %>"><%= publisher.NAME %></a>
+                        </div>
+                    <%})%>
+                    <% } %>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -12,13 +12,33 @@ const homepage_router = require('./homepageRoutes');
 
 const logout_router = require('./authentication/logout');
 
+const cart_router = require('./cartRoutes');
+
+const search_router = require('./searchRoutes');
+const filter_router = require('./filterRoutes');
+
 router.get('/', async(req, res) => {
     const all_books = await bookQuery.getAllBooks();
+    const all_genre = await bookQuery.getAllGenre();
+    const all_authors = await bookQuery.getAllAuthors();
+
+    all_genre.forEach(element => {
+        console.log(element.GENRE);
+    });
     res.render('index.ejs', {
-        books: all_books
+        books: all_books,
+        genres: all_genre,
+        authors: all_authors
     });
     res.render('index');
 });
+
+router.get('/homepage', async(req, res) => {
+    const all_books = await bookQuery.getAllBooks();
+    res.render('homepage.ejs', {
+        books: all_books
+    });
+})
 
 router.use('/books', book_router);
 router.use('/writers', writer_router);
@@ -30,6 +50,11 @@ router.use('/homepage', homepage_router);
 router.use('/signup', signup_router);
 router.use('/login', login_router);
 router.use('/logout', logout_router);
+
+router.use('/search', search_router);
+router.use('/filter', filter_router);
+
+router.use('/cart', cart_router);
 
 module.exports = router;
 

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= books[0].TITLE %></title>
     <link rel="stylesheet" href="/styles.css"> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <nav>
@@ -14,19 +16,63 @@
             <li><a href="/publishers">Publishers</a></li>
         </ul>
     </nav>
-    <% if(books.length > 0) { %>
-        <% books.forEach(book => { %>
-            <div class="single-book-detail">
-                <img src="/images/Kalbela.jpg" alt="kalbela" width="240" height="320">               
-                <h4><%= book.TITLE %></h4>
-                <p>Writer: <%= book.WRITER_NAME %></p>
-                <p>Publisher: <%= book.PUBLISHER %></p>
-                <p>Publication year: <%= book.DATE_PUBLISHED %></p>
-                <p>Genre: <%= book.GENRE %></p>
-                <p>Total page: <%= book.PAGE %></p>
-                <p>Price: <%= book.PRICE %></p>   
-            </div>       
-        <% }) %>
-    <% } %>
+    <div class="single_book">
+        <% if(books.length > 0) { %>
+            <% books.forEach(book => { %>
+                <div class="single-book-detail">
+                    <img src="/images/Kalbela.jpg" alt="kalbela" width="240" height="320">               
+                    <h4><%= book.TITLE %></h4>
+                    <p>Writer: <%= book.WRITER_NAME %></p>
+                    <p>Publisher: <%= book.PUBLISHER %></p>
+                    <p>Publication year: <%= book.DATE_PUBLISHED %></p>
+                    <p>Genre: <%= book.GENRE %></p>
+                    <p>Total page: <%= book.PAGE %></p>
+                    <p>Price: <%= book.PRICE %></p> 
+                    <button id="cart-post" class="login-button" >Add to Cart</button>
+                    <button id="wishlist-post" class="login-button">Add to Wishlist</button>   
+                </div>       
+            <% }) %>
+        <% } %>
+
+        
+    </div>
+    
+    
+    <script> 
+        const button = document.getElementById('cart-post');
+        console.log(button);
+        
+        let id = '<%= books[0].ID %>';
+        // function addToCart() {
+        //     console.log('ajax');
+        //     $.ajax ( {
+        //         url: `/cart/${id}`,
+        //         type: 'POST'
+        //     });
+        //     console.log('add to cart');
+        // }
+
+        button.addEventListener('click', async(e) => {
+            e.preventDefault();
+            try {
+            const res = await fetch(`/cart/${id}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            console.log(data);
+            if(data.user == null) {
+                location.assign('/login');
+            }
+            else {
+                console.log('success! adding');
+            }
+        }
+        catch(err) {
+            console.log(err);
+        }
+        })
+        
+    </script>
 </body>
 </html>

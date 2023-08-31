@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All writers</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles2.css">
 </head>
 <body>
     <nav>
@@ -29,7 +29,7 @@
                 <% let count = 0; %>
                 <div class="all-writers-line">
                     <% writers.forEach(writer => { %>
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  
+                            &nbsp; &nbsp; &nbsp; &nbsp; 
                              
                             <a href="/writers/<%=writer.ID %>">
                             <br>
@@ -40,7 +40,7 @@
                             
                             <!-- &nbsp; -->
                             </a>
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            &nbsp; &nbsp; &nbsp; &nbsp;
                         <% count++; %>
                         <% if (count === 5) { %>
                             </div><div class="all-writers-line">

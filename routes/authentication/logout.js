@@ -2,7 +2,7 @@ const {Router} = require('express');
 
 const router = Router({mergeParams: true});
 
-router.post('/', async (req, res) => {
+router.get('/', async (req, res) => {
     res.clearCookie('sessionToken');
     res.redirect('/');
 });
