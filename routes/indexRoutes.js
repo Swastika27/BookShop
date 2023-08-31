@@ -10,6 +10,8 @@ const login_router = require('./loginRoutes');
 const signup_router = require('./signupRoutes');
 const homepage_router = require('./homepageRoutes');
 
+const logout_router = require('./authentication/logout');
+
 router.get('/', async(req, res) => {
     const all_books = await bookQuery.getAllBooks();
     res.render('index.ejs', {
@@ -24,6 +26,10 @@ router.use('/publishers', publisher_router);
 router.use('/login', login_router);
 router.use('/signup', signup_router);
 router.use('/homepage', homepage_router);
+
+router.use('/signup', signup_router);
+router.use('/login', login_router);
+router.use('/logout', logout_router);
 
 module.exports = router;
 
