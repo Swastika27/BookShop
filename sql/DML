@@ -24,3 +24,7 @@ ADD phone_no VARCHAR2 ( 15 );
 --DROPED COLUMN 
 ALTER TABLE ROKOMARI.BOOK
 DROP COLUMN DESCRIPTION;
+
+--added default email address for publisher
+ALTER TABLE ROKOMARI.PUBLISHER
+MODIFY EMAIL DEFAULT 'publisher@gmail.com';
