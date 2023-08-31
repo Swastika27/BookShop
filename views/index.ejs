@@ -4,29 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BitLit Book | Online Bookshop</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles2.css">
+    <link rel="stylesheet" href="/filter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <div class="navbar">
+    <!-- <div class="navbar">
         <div class="logo">
             <img src="/images/Logo.jpg" alt="logo image" >
         </div>
         <div class="actions">
             <div class="search-bar">
-                <form action="/search" method="get">
-                    <input type="text" name="query" placeholder="Search books, writers...">
+                <form action="/search" method="POST">
+                    <input type="text" name="search_text" placeholder="Search books, writers...">
                     <button class="login-button" type="submit">Search</button>
                 </form>
             </div>
             <div class="auth-buttons">
-                                    <button class="login-button" onclick="location.assign('/login')">Log In</button>
-                                    <button class="signup-button" onclick="location.assign('/signup')">Sign Up</button>
+                <button class="login-button" onclick="location.assign('/login')">Log In</button>
+                <button class="signup-button" onclick="location.assign('/signup')">Sign Up</button>
 
-                <!-- <a href="/login">
-                    <br> login <br> 
-                </a> -->
-                
-                <!-- <button class="signup-button">Sign Up</button> -->
             </div>
         </div>
     </div>
@@ -35,9 +32,6 @@
             <li><a href="/books">Books</a></li>
             <li><a href="/writers">Writers</a></li>
             <li><a href="/publishers">Publishers</a></li>
-            <!-- delete later -->
-            <!-- <li><a href="/signup">Signup</a></li>
-            <li><a href="/login">Login</a></li> -->
         </ul>
     </nav>
     <div class="all-books">
@@ -65,6 +59,279 @@
                 </div>
             <% } %>
         </ul>
+    </div> -->
+
+    <div class="header-section">
+        <div class="upper-line">
+            <div class="logo">
+                <img src="/images/Logo.jpg" alt="logo image" >
+            </div>
+            <div class="search-bar">
+                <form action="/search" method="POST">
+                    <input type="text" name="search_text" placeholder="Search books, writers...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <div >
+                <button onclick="location.assign('/login')">Log In</button>
+                <button onclick="location.assign('/signup')">Sign Up</button>
+            </div>
+        </div>
+
+        <div class="lower-line">
+            <nav>
+                <ul>
+                    <li><a href="/books">Books</a></li>
+                    <li><a href="/writers">Writers</a></li>
+                    <li><a href="/publishers">Publishers</a></li>
+                </ul>
+            </nav>
+        </div>
+        
     </div>
+
+    <div class="main-section">
+        <div class="filter-section">
+            <!-- <div>genre filter</div>
+            <div>author filter</div>
+            <div>publisher filter</div>
+            <div>price filter</div>
+            <div>rate filter</div> -->
+            <div class="container">
+                <div class="select-btn genre">
+                    <span class="btn-text genre">Select genre</span>
+                    <span class="arrow-down">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                </div>
+
+                <ul class="list-items">
+                    <%genres.forEach(genre => { %>
+                        <li class="item genre">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text"><%= genre.GENRE %></span>
+                        </li>
+                    <%})%>
+                </ul>
+            </div>
+            <p>container divider</p>
+            <div class="container">
+                <div class="select-btn author">
+                    <span class="btn-text author">Select author</span>
+                    <span class="arrow-down">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                </div>
+
+                <ul class="list-items">
+                    <%authors.forEach(author => { %>
+                        <li class="item author">
+                            <span class="checkbox">
+                                <i class="fa-solid fa-check check-icon"></i>
+                            </span>
+                            <span class="item-text"><%= author.NAME %></span>
+                        </li>
+                    <%})%>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="items-section">
+            <div class="book-header">
+                
+            </div>
+            <div class="display-books">
+                <% if(books.length > 0) { %>
+                    <% books.forEach(book => { %>
+                        <div class="single-book">
+                            <a href="/books/<%= book.ID %>">
+                                <img src="/images/Kalbela.jpg" alt="default" width="150" height="200">
+                                <h4><%= book.TITLE %></h4>
+                                <p><%= book.WRITER_NAME %></p>
+                                <p><%= book.PUBLISHER %></p></a>
+                        </div>
+                            
+                    <% }) %>
+                <% } %>
+            </div>
+            
+        </div>
+        
+
+    </div>
+
+    <script>
+        // filter by genre
+        const selectBtnGenre = document.querySelector('.select-btn.genre'),
+            genreItems = document.querySelectorAll('.item.genre');
+        selectBtnGenre.addEventListener('click', () => {
+            selectBtnGenre.classList.toggle('open');
+        });
+        genreItems.forEach(item => {
+            item.addEventListener('click', async (e) => {
+                item.classList.toggle('checked');                
+
+                let checked = document.querySelectorAll('.genre.checked'),
+                    btnText = document.querySelector('.genre.btn-text');
+                
+                let texts = [];
+                checked.forEach(c => {
+                    texts.push(c.innerText);
+                })
+                console.log(texts);
+                if(checked && checked.length > 0) {
+                    btnText.innerText = `${checked.length} Selected`;
+                }
+                else {
+                    btnText.innerText = 'Select genre';
+                }
+
+                e.preventDefault();
+                try {
+                    const res = await fetch('/filter/genre', {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify(texts)
+                    })
+                    
+                const data = await res.json();
+                console.log(data);
+
+                const displayBooksDiv = document.querySelector('.display-books');
+                displayBooksDiv.innerHTML = ''; // Clear existing content
+        
+                if (data.result.length > 0) {
+                data.result.forEach(book => {
+                    const singleBookDiv = document.createElement('div');
+                    singleBookDiv.classList.add('single-book');
+                    
+                    const bookLink = document.createElement('a');
+                    bookLink.href = `/books/${book.ID}`;
+                    
+                    const bookImage = document.createElement('img');
+                    bookImage.src = '/images/Kalbela.jpg';
+                    bookImage.alt = 'default';
+                    bookImage.width = 150;
+                    bookImage.height = 200;
+                    
+                    const bookTitle = document.createElement('h4');
+                    bookTitle.innerText = book.TITLE;
+                    
+                    const writerName = document.createElement('p');
+                    writerName.innerText = book.WRITER_NAME;
+                    
+                    const publisher = document.createElement('p');
+                    publisher.innerText = book.PUBLISHER;
+                    
+                    bookLink.appendChild(bookImage);
+                    bookLink.appendChild(bookTitle);
+                    bookLink.appendChild(writerName);
+                    bookLink.appendChild(publisher);
+                    
+                    singleBookDiv.appendChild(bookLink);
+                    displayBooksDiv.appendChild(singleBookDiv);
+                    });
+                }
+                
+            }
+            catch(err) {
+            console.log(err);
+            }
+        })
+        })
+
+
+        // filter by author
+        const selectBtnAuthor = document.querySelector('.select-btn.author'),
+            authorItems = document.querySelectorAll('.item.author');
+        selectBtnAuthor.addEventListener('click', () => {
+            console.log('oosijfodj');
+            selectBtnAuthor.classList.toggle('open');
+            console.log(selectBtnAuthor.classList);
+        });
+
+        authorItems.forEach(i => {
+            console.log('jjkfnvjk');
+            i.addEventListener('click', async (e) => {
+                console.log('author button clicked');
+                i.classList.toggle('checked');                
+
+                let checked = document.querySelectorAll('.author.checked'),
+                    btnText = document.querySelector('.author.btn-text');
+                
+                let texts = [];
+                checked.forEach(c => {
+                    texts.push(c.innerText);
+                })
+                console.log(texts);
+                if(checked && checked.length > 0) {
+                    btnText.innerText = `${checked.length} Selected`;
+                }
+                else {
+                    btnText.innerText = 'Select author';
+                }
+
+                e.preventDefault();
+                try {
+                    const res = await fetch('/filter/author', {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify(texts)
+                    })
+                    
+                const data = await res.json();
+                console.log(data);
+
+                const displayBooksDiv = document.querySelector('.display-books');
+                displayBooksDiv.innerHTML = ''; // Clear existing content
+        
+                if (data.result.length > 0) {
+                data.result.forEach(book => {
+                    const singleBookDiv = document.createElement('div');
+                    singleBookDiv.classList.add('single-book');
+                    
+                    const bookLink = document.createElement('a');
+                    bookLink.href = `/books/${book.ID}`;
+                    
+                    const bookImage = document.createElement('img');
+                    bookImage.src = '/images/Kalbela.jpg';
+                    bookImage.alt = 'default';
+                    bookImage.width = 150;
+                    bookImage.height = 200;
+                    
+                    const bookTitle = document.createElement('h4');
+                    bookTitle.innerText = book.TITLE;
+                    
+                    const writerName = document.createElement('p');
+                    writerName.innerText = book.WRITER_NAME;
+                    
+                    const publisher = document.createElement('p');
+                    publisher.innerText = book.PUBLISHER;
+                    
+                    bookLink.appendChild(bookImage);
+                    bookLink.appendChild(bookTitle);
+                    bookLink.appendChild(writerName);
+                    bookLink.appendChild(publisher);
+                    
+                    singleBookDiv.appendChild(bookLink);
+                    displayBooksDiv.appendChild(singleBookDiv);
+                    });
+                }
+                
+            }
+            catch(err) {
+            console.log(err);
+            }
+        })
+        })
+
+    </script>
+
 </body>
 </html>

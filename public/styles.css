@@ -3,10 +3,11 @@
 body {
     max-width: 1200px;
     margin: 30px auto;
-    padding: 0 20px;
+    /* padding: 0 20px; */
     font-family: 'Rubik', sans-serif;
     font-family: 'Tiro Bangla', serif;
     font-size: medium;
+    background-color: bisque;
 }
 
 p, h1, h2, h3, h4, h5, h6, a, ul {
@@ -314,6 +315,11 @@ ul, li {
 }
 
 /* all books */
+.all-books 
+{
+    width: 1000px;
+    background-color: aqua;
+}
 .all-books-list li {
     flex-basis: 25%;
     box-sizing: border-box; /* Include padding and border in width */

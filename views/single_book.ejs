@@ -28,7 +28,7 @@
                     <p>Genre: <%= book.GENRE %></p>
                     <p>Total page: <%= book.PAGE %></p>
                     <p>Price: <%= book.PRICE %></p> 
-                    <button id="cart-post" class="login-button" onclick="addToCart();">Add to Cart</button>
+                    <button id="cart-post" class="login-button" >Add to Cart</button>
                     <button id="wishlist-post" class="login-button">Add to Wishlist</button>   
                 </div>       
             <% }) %>
@@ -38,16 +38,41 @@
     </div>
     
     
-    <script>        
+    <script> 
+        const button = document.getElementById('cart-post');
+        console.log(button);
+        
         let id = '<%= books[0].ID %>';
-        function addToCart() {
-            console.log('ajax');
-            $.ajax ( {
-                url: `/cart/${id}`,
-                type: 'POST'
+        // function addToCart() {
+        //     console.log('ajax');
+        //     $.ajax ( {
+        //         url: `/cart/${id}`,
+        //         type: 'POST'
+        //     });
+        //     console.log('add to cart');
+        // }
+
+        button.addEventListener('click', async(e) => {
+            e.preventDefault();
+            try {
+            const res = await fetch(`/cart/${id}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}
             });
-            console.log('add to cart');
+            const data = await res.json();
+            console.log(data);
+            if(data.user == null) {
+                location.assign('/login');
+            }
+            else {
+                console.log('success! adding');
+            }
         }
+        catch(err) {
+            console.log(err);
+        }
+        })
+        
     </script>
 </body>
 </html>

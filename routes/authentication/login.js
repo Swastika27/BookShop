@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     // console.log(req.query.token);
     if(req.user == null) { // not logged in
         console.log('in login, user not logged in');
-        return res.render('login', {
+        res.render('login', {
             title: 'Login',
             user: null,
             form: {
@@ -20,6 +20,11 @@ router.get('/', (req, res) => {
             },
             errors: []
         });
+        // res.render('login', {
+        //     title: 'LOGIN',
+        //     errors: []
+        // });
+        // res.send('login page');
     }
     else { // logged in
         res.redirect('/homepage');

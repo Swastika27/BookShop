@@ -37,18 +37,28 @@ async function isAlreadyAdded(customer_id, book_id) {
             b_id: book_id
         };
         const data = await database.execute(query, binds, database.options);
-        return data.rows;
+        console.log(data);
+        if (data.rows.length > 0) {
+            return data.rows;
+        }
+        return null;
     }
 }
 
 async function addToCart(customer_id, book_id) {
-    const cartId = await getActiveCart(customer_id)[0];
+    const carts = await getActiveCart(customer_id);
+    const cartId = carts[0].ID;
+    console.log(carts);
+    console.log(cartId);
     if(cartId !== null) {
         const query = `INSERT INTO CARTITEMS(CART_ID, BOOK_ID) VALUES (:c_id, :b_id)`;
         binds = {
             c_id: customer_id,
             b_id: book_id
         };
+        console.log('query, ', query);
+        console.log('binds', binds);
+        console.log('options ', database.options);
         const updateResult = await database.execute(query, binds, database.options);
         console.log('added to cadrt');
         return;
