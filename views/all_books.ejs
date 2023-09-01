@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" href="/styles.css"> 
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/books">Books</a></li>
+            <li><a href="/writers">Writers</a></li>
+            <li><a href="/publishers">Publishers</a></li>
+        </ul>
+    </nav>
+    <h2>All books</h2>
+    <!-- <% if(books.length > 0) { %>
+        <% books.forEach(book => { %>
+            <a href="/books/<%= book.ID %>">
+                <img src="book.IMAGE" alt="default" width="260" height="320">
+                <h4><%= book.TITLE %></h4>
+                <p><%= book.WRITER_NAME %></p>
+                <p><%= book.PUBLISHER %></p></a>            
+        <% }) %>
+    <% } %> -->
+    <div class="all-books">
+        <ul class="all-books-grid">
+            <% if(books.length > 0) { %>
+                <% let count = 0; %>
+                <div class="all-books-line">
+                    <% books.forEach(book => { %>
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <a href="/books/<%= book.ID %>">
+                            <br>
+                            <br>
+                            <img src="/images/Kalbela.jpg" alt="default" width="150" height="200">
+                            <h4><%= book.TITLE %></h4>
+                            <p><%= book.WRITER_NAME %></p>
+                            <p><%= book.PUBLISHER %></p></a>   
+                             
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                        <% count++; %>
+                        <% if (count === 5) { %>
+                            </div><div class="all-books-line">
+                            <% count = 0; %>
+                        <% } %>
+                    <% }) %>
+                </div>
+            <% } %>
+        </ul>
+    </div>
+</body>
+</html>
