@@ -51,6 +51,31 @@ INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('দ্�
 INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('অনুপম প্রকাশনী', null, 'anupom@gmail.com', 'abcde');
 INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('বিশ্বসাহিত্য কেন্দ্র', null, 'bsk@gmail.com', 'abcde');
 
+--added later
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('তাম্রলিপি', null, 'tamrolipi@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('ল্যাব বাংলা', null, 'lbangla@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('খোশরোজ কিতাব মহল', null, 'khoshroj@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('দিব্য প্রকাশ', null, 'dibya@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('অন্বেষা প্রকাশন', null, 'anwesha@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('সূচীপত্র', null, 'suchipotro@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('রুশদা প্রকাশ', null, 'rushda@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('গার্ডিয়ান পাবলিকেশনস', null, 'gardian@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('সমকালীন প্রকাশন', null, 'somokalin@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('অনিন্দ্য প্রকাশ', null, 'anindya@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('পাঞ্জেরী পাবলিকেশন্স', null, 'pamjeri@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('বইবাজার প্রকাশনী', null, 'boibazar@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('দি ইউনিভার্সিটি প্রেস লিমিটেড(ইউ পি এল)', null, 'upl@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('সিম্পোজিয়াম পাবলিকেশন্স', null, 'sym@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('আজব প্রকাশ', null, 'ajob@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('প্রজন্ম পাবলিকেশন', null, 'projonmo@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('সময় প্রকাশন', null, 'somoy@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('অনুভূতি প্রকাশনী', null, 'anuvuti@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('জয় প্রকাশন', null, 'joy@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('সেবা প্রকাশনী', null, 'sheba@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('সালমা বুক ডিপো', null, 'salmabd@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('আনন্দ পাবলিশার্স (ভারত)', null, 'ananda1@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('চারুলিপি প্রকাশন', null, 'kcharulipi@gmail.com', 'abcde');
+INSERT INTO ROKOMARI.Publisher(Name, Address, Email, Password) VALUES ('বুকস্‌ ফেয়ার', null, 'booksfair@gmail.com', 'abcde');
 
 --3 Book
 INSERT INTO ROKOMARI.Book(ID, Title, Writer_ID, Publisher, Date_Published, Genre, Quantity_in_stock, Quantity_sold, Price, Language, Description, Rating, Page, Image) VALUES (1, 'আমি তপু', 100, 'পার্ল পাবলিকেশন্স', 2005, 'শিশু-কিশোর উপন্যাস', 10, 0, 250, 'Bangla', null, 0, 123, '/images/books/defaultbook.jpg');
