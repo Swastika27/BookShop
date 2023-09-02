@@ -6,10 +6,12 @@ const bookQuery = require('../database/bookQuery')
 const book_router = require('./bookRoutes');
 const writer_router = require('./authorRoutes');
 const publisher_router = require('./publisherRoutes');
-const login_router = require('./loginRoutes');
-const signup_router = require('./signupRoutes');
+// const login_router = require('./loginRoutes');
+// const signup_router = require('./signupRoutes');
 const homepage_router = require('./homepageRoutes');
 
+const signup_router = require('./authentication/signup');
+const login_router = require('./authentication/login');
 const logout_router = require('./authentication/logout');
 
 const cart_router = require('./cartRoutes');
