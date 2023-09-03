@@ -10,10 +10,19 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const book_data = await books.getBookById(req.params.id);
+    const book_id = req.params.id;
+    const book_data = await books.getBookById(book_id);
+    // const genre_books = await books.getBooksByGenre(genre.GENRE);
+    const genre_books = await books.getSameGenreBooks(book_id);
+    console.log(genre_books);
+    // const writer = (await books.getAuthorId(book_id))[0];
+    const writer_books = await books.getSameAuthorDiffGenreBooks(book_id);
+    console.log(writer_books)
 
     res.render('single_book', {
-        books: book_data
+        books: book_data,
+        genreBooks: genre_books,
+        writerBooks: writer_books
     });
 });
 

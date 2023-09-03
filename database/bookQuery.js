@@ -100,14 +100,67 @@ async function getBooksByAuthorFilter(authors) {
     return (await database.execute(query, binds, database.options)).rows;
 }
 
+async function getBooksByGenre (genre) {
+    const query = `Select Book.TITLE, Book.ID, Book.PUBLISHER, Writer.name As WRITER_NAME from Book, Writer where (Book.Writer_id = Writer.id) AND (BOOK.genre LIKE :genre)`;
+    const binds = {
+        genre: {
+            dir: oracledb.BIND_IN, // Specify the direction (BIND_IN for input)
+            type: oracledb.STRING, // Specify the data type
+            val: genre // The actual value to bind
+          }
+    };
+    return (await database.execute(query, binds, database.options)).rows;
+}
+
+async function getAuthorId(book_id) {
+    const query = `SELECT WRITER_ID FROM BOOK WHERE (BOOK.ID = :id)`;
+    const binds = {
+        id: book_id
+    }
+    return (await database.execute(query, binds, database.options)).rows;
+}
+
+
+async function getSameGenreBooks (book_id) {
+    console.log(book_id);
+    const query = `select book.id as id, title, publisher, writer.name as writer_name from book join writer on (book.writer_id = writer.id) where (book.genre in (select genre from book where id = :id))
+    minus (select book.id as id, title, publisher, writer.name as writer_name from book join writer on (book.writer_id = writer.id) where (book.id = :id) )`;
+    const binds = {
+        id: book_id
+    };
+
+    return (await database.execute(query, binds, database.options)).rows;
+}
+
+async function getSameAuthorDiffGenreBooks(book_id) {
+    const query = `select book.id as id, title, publisher, writer.name as writer_name
+     from book join writer 
+     on (book.writer_id = writer.id) 
+     where (book.writer_id in 
+        (select writer_id from book where id = :id) 
+        )
+        minus 
+        (select book.id as id, title, publisher, writer.name as writer_name 
+            from book join writer 
+            on (book.writer_id = writer.id) 
+            where (book.genre in (select genre from book where id = :id) )
+            )`;
+    const binds = {
+        id: book_id
+    };
+
+    return (await database.execute(query, binds, database.options)).rows;
+}
+
 module.exports = {
     getAllBooks,
     getBookById,
-    getBooksByAuthorId,
     getBooksByPublisher,
     getBooksByText,
     getAllGenre,
     getBooksByGenreFilter,
     getAllAuthors,
-    getBooksByAuthorFilter
+    getBooksByAuthorFilter,
+    getSameGenreBooks,
+    getSameAuthorDiffGenreBooks
 }

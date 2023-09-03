@@ -23,9 +23,8 @@ router.get('/', async(req, res) => {
     const all_genre = await bookQuery.getAllGenre();
     const all_authors = await bookQuery.getAllAuthors();
 
-    all_genre.forEach(element => {
-        console.log(element.GENRE);
-    });
+    console.log(all_genre);
+    
     res.render('index.ejs', {
         books: all_books,
         genres: all_genre,
