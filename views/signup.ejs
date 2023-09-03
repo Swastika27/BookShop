@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login Form</title>
-    <link rel="stylesheet" href="/styles.css">
+    <title>Signup Form</title>
+    <link rel="stylesheet" href="/styleLoginSignup.css">
 </head>
 <body>
-    <div class="center">
-        <h2>Sign Up</h2>
-        <form method="post">
-            <div class="txt_field">
-                <input type="text" required>
-                <label>Username</label>
-                <span></span>
-            </div>
-            <div class="txt_field">
-                <input type="email" required>
-                <label>Email</label>
-                <span></span>
-            </div>
-            <div class="txt_field">
-                <input type="password" required>
-                <label>Password</label>
-                <span></span>
-            </div>           
-            <input type="submit" value="signup">
+    <div class="form-container">
+        <div class="form-btn">
+            <span>Sign Up</span>
+        </div>
+
+        <form>
+            <input type="text" placeholder="Username" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <!-- <a href="">Forgot Password?</a> -->
+            <br>
+            <button type="submit" class="btn2">Sign Up As Customer</button>
+            <!-- <button type="submit" class="btn1">Sign Up As Admin</button> -->
+            <button type="submit" class="btn3">Sign Up As Publisher</button>            
         </form>
+
     </div>
 </body>
 </html>

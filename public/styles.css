@@ -314,35 +314,3 @@ ul, li {
     margin: 0 -10px; 
     flex-wrap: wrap; 
 } 
-
-
-
-
-
-/* @import url('https://fonts.googleapis.com/css2?family=Rubik&family=Tiro+Bangla&display=swap'); */
-
-.cart-page
-{
-    margin: 80px auto;
-}
-
-table
-{
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.cart-info
-{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-th
-{
-    text-align: left;
-    padding: 5px;
-    color: #fff;
-    background-color: rgb(8, 55, 55);
-    font-weight: normal;
-}

@@ -4,28 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+    <link rel="stylesheet" href="/styleLoginSignup.css">
 </head>
 <body>
-    <form action="/login" method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" value="<%= (typeof form != 'undefined') ? form.name:''%>" required>
+    <div class="form-container">
+        <div class="form-btn">
+            <span>Log In</span>
+        </div>
 
-        <label>Email: </label>
-        <input type="email" name="email" value="<%= (typeof form != 'undefined') ? form.email:''%>" required>
+        <form action="/login" method="POST">
 
-        <label>Password: </label>
-        <input type="password" name="password" value="<%= (typeof form != 'undefined') ? form.password:'' %>" required>
+            <input type="text" name="name" placeholder="Username"  value="<%= (typeof form != 'undefined') ? form.name:''%>" required>
+    
+            <input type="email" name="email" placeholder="Email" value="<%= (typeof form != 'undefined') ? form.email:''%>" required>
+    
+            <input type="password" name="password" placeholder="Password" value="<%= (typeof form != 'undefined') ? form.password:'' %>" required>
+    
+            <% if (errors.length > 0) { %>
+                <ul>
+                    <% for (e of errors) { %>
+                        <li> <%= e %> </li>
+                    <% } %>
+                </ul>
+            <% } %>
 
-        <% if (errors.length > 0) { %>
-            <ul>
-                <% for (e of errors) { %>
-                    <li> <%= e %> </li>
-                <% } %>
-            </ul>
-        <% } %>
+            <br>
+            <button type="submit" class="btn2">Sign Up As Customer</button>
+            <button type="submit" class="btn1">Sign Up As Admin</button>
+            <button type="submit" class="btn3">Sign Up As Publisher</button>  
+    
+        </form>
 
-        <button type="submit">Login</button>
-    </form>
+    </div>
+    
     
 </body>
 </html>

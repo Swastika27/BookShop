@@ -6,11 +6,12 @@ const bookQuery = require('../database/bookQuery')
 const book_router = require('./bookRoutes');
 const writer_router = require('./authorRoutes');
 const publisher_router = require('./publisherRoutes');
-const login_router = require('./loginRoutes');
-const signup_router = require('./signupRoutes');
-const homepage_router = require('./homepageRoutes');
-
+const login_router = require('./authentication/login');
 const logout_router = require('./authentication/logout');
+const signup_router = require('./authentication/signup');
+// const homepage_router = require('./homepageRoutes');
+
+
 
 const cart_router = require('./cartRoutes');
 
@@ -30,7 +31,6 @@ router.get('/', async(req, res) => {
         genres: all_genre,
         authors: all_authors
     });
-    res.render('index');
 });
 
 router.get('/homepage', async(req, res) => {
@@ -45,7 +45,7 @@ router.use('/writers', writer_router);
 router.use('/publishers', publisher_router);
 router.use('/login', login_router);
 router.use('/signup', signup_router);
-router.use('/homepage', homepage_router);
+// router.use('/homepage', homepage_router);
 
 router.use('/signup', signup_router);
 router.use('/login', login_router);

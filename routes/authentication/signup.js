@@ -13,8 +13,10 @@ router.get('/', (req, res) => {
             user: null,
             errors: []
         });
+
     }
     else {
+        console.log('user logged in');
         res.redirect('/'); // if already logged in, redirect to home page
     }
 });
