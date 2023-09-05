@@ -123,3 +123,15 @@ CREATE TABLE Orders (
 	CONSTRAINT orders_cart_id_fk FOREIGN KEY ( cart_id ) REFERENCES CartCustomers ( id ),
 	CONSTRAINT orders_pk PRIMARY KEY ( cart_id ) 
 );
+
+---creating new table with writer id 
+CREATE TABLE Book_and_Writer (
+ BOOK_ID NUMBER,
+ WRITER_ID NUMBER,
+ CONSTRAINT book_writer_pk PRIMARY KEY ( BOOK_ID )
+); 
+
+--inserting the book id and writer id in the new table 
+INSERT INTO ROKOMARI.BOOK_AND_WRITER (BOOK_ID, WRITER_ID)
+SELECT ID, WRITER_ID 
+FROM BOOK;
