@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="/styleCart.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <!-- <h3>Cart</h3> -->
+    <div class="small-container cart-page">
+        <table>
+            <tr>
+                <th>Book</th>
+                <th>Writer</th>
+                <th>Genre</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+            
+                <% if (items.length > 0) { %>
+                    <% for(let i = 0; i < items.length; i++) { %>
+                        <tr>
+                            <td>
+                                <div class="cart-info">
+                                    <img src="images\Kalbela.jpg" alt="Product image" width="60px" height="80px">
+                                    <div>
+                                        <p><%= items[i].TITLE %></p>
+                                        <a href=<%= '/wishlist/delete/' + items[i].ID %>>Remove</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <%=items[i].WRITER_NAME %>
+                            </td>
+                            <td>
+                                <%= items[i].GENRE %>
+                            </td>
+                            <td>
+                                <%= items[i].PRICE %>Tk.
+                            </td>
+                            <td>
+                                <button>Add to Cart</button><br>
+                                <button>Delete</button>
+                            </td>
+                        </tr>
+                        
+                    <% } %>
+                <%}%>
+        </table>
+    </div>
+</body>
+</html>

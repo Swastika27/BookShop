@@ -79,9 +79,64 @@ async function getBooksByGenreFilter(genres) {
 
     return (await database.execute(query, binds, database.options)).rows;
 }
+async function getBooksByFilter(sort_type, genres, writers) {
+    console.log('a' + '' + '' + '' + 'b');
+     let genreCondition = ``;
+     let binds = {};
+     if (genres.length > 0) {
+        genreCondition = genreCondition + `(genre = :g0)`;
+        binds[`g0`] = genres[0];
+        for (let i = 1; i < genres.length; i++) {
+            genreCondition = genreCondition + `or (genre = :g${i})`;
+            binds[`g${i}`] = genres[i];
+        }
+     }
+
+     let writerCondition = ``;
+    
+     if(writers.length > 0) {
+        writerCondition = writerCondition + `(writer.name = :w0)`;
+        binds[`w0`] = writers[0];
+        for(let i = 1; i < writers.length; i++) {
+            writerCondition = writerCondition + ` or (writer.name = :w${i})`;
+            binds[`w${i}`] = writers[i];
+        }
+     }
+     let order_by = ``;
+     if(sort_type != null) {
+        order_by = order_by + 'ORDER BY PRICE ' + sort_type; 
+     }
+
+     let condition = ``;
+     if(genreCondition !== '') {
+        condition = `(${genreCondition})`
+     }
+     if(condition !== '' && writerCondition != '') {
+        condition = condition + ` AND (${writerCondition})`;
+     }
+     else if (condition == '' && writerCondition != '') {
+        condition = condition + ` ${writerCondition}`;
+     }
+
+     if(condition !== '') {
+        condition = 'WHERE ' + condition;
+     }
+
+    condition = condition + ` ${order_by}`;
+
+
+     console.log(condition);
+
+     const query = `Select book.id as id, title, publisher, name as writer_name 
+     From Book 
+     Join writer 
+     on (book.writer_id = writer.id) ` + condition;
+
+     return (await database.execute(query, binds, database.options)).rows;
+}
 
 async function getAllAuthors () {
-    const query = `SELECT NAME FROM WRITER`;
+    const query = `SELECT NAME FROM WRITER ORDER BY NAME`;
     const binds = {};
     return (await database.execute(query, binds, database.options)).rows;
 }
@@ -95,7 +150,11 @@ async function getBooksByAuthorFilter(authors) {
         condition = condition + ` or (writer.name = :w${i})`;
         binds[`w${i}`] = authors[i];
     }
-    const query = `Select book.id as id, title, publisher, name as writer_name From Book Join writer on (book.writer_id = writer.id) where ` + condition;
+    const query = `Select book.id as id, title, publisher, name as writer_name 
+    From Book 
+    Join writer 
+    on (book.writer_id = writer.id) 
+    where ` + condition;
 
     return (await database.execute(query, binds, database.options)).rows;
 }
@@ -123,8 +182,16 @@ async function getAuthorId(book_id) {
 
 async function getSameGenreBooks (book_id) {
     console.log(book_id);
-    const query = `select book.id as id, title, publisher, writer.name as writer_name from book join writer on (book.writer_id = writer.id) where (book.genre in (select genre from book where id = :id))
-    minus (select book.id as id, title, publisher, writer.name as writer_name from book join writer on (book.writer_id = writer.id) where (book.id = :id) )`;
+    const query = `select book.id as id, title, publisher, writer.name as writer_name 
+    from book 
+    join writer on (book.writer_id = writer.id)
+    where (book.genre in (select genre from book where id = :id))
+    minus 
+    (select book.id as id, title, publisher, writer.name as writer_name 
+        from book 
+        join writer 
+        on (book.writer_id = writer.id) 
+        where (book.id = :id) )`;
     const binds = {
         id: book_id
     };
@@ -162,5 +229,6 @@ module.exports = {
     getAllAuthors,
     getBooksByAuthorFilter,
     getSameGenreBooks,
-    getSameAuthorDiffGenreBooks
+    getSameAuthorDiffGenreBooks,
+    getBooksByFilter
 }

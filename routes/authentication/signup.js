@@ -44,16 +44,25 @@ router.post('/', async (req, res) => {
         console.log(req.body.name, req.body.password);
 
         if(errors.length > 0) {
-            res.render('signup', {
-                title: 'signup',
-                user: null,
-                errors: errors,
-                form: {
-                    name: req.body.name,
-                    email: req.body.password,
-                    // password2: req.body.password2
-                }
-            });
+            // res.render('signup', {
+            //     title: 'signup',
+            //     user: null,
+            //     errors: errors,
+            //     form: {
+            //         name: req.body.name,
+            //         email: req.body.password,
+            //         // password2: req.body.password2
+            //     }
+            // });
+            res.send({
+                    title: 'signup',
+                    user: null,
+                    errors: errors,
+                    form: {
+                        name: req.body.name,
+                        email: req.body.password,
+                        // password2: req.body.password2
+                    }});
         }
 
         else { // no errors
@@ -71,17 +80,25 @@ router.post('/', async (req, res) => {
             console.log('no error hashing');
             user.password = hashedPassword;
             let result = await Db_auth.createNewCustomer(user);
+            console.log(result);
             console.log('goin to find new user');
             let result2 = await Db_auth.getLoginInfoFromEmail(user.email);
-            console.log('new user found');
+            console.log('new user found ', result2);
             await authUtils.loginUser(res, result2[0].ID);
             // redirect to home page
             console.log('redirect to home page')
-            res.redirect('/');
+            res.send({
+                user: result2[0].ID,
+                errors: []
+            });
         }
     }
     else {
-        res.redirect('/');
+        // res.redirect('/');
+        res.send({
+            user: result2[0].ID,
+            errors: []
+        });
     }
 });
 
