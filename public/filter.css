@@ -93,3 +93,10 @@
 .item.checked .check-icon {
     transform: scale(1);
 }
+.radio-options {
+    display: block;
+}
+input[type="radio"] {
+    margin: 10px;
+    accent-color:  #307aba;
+}

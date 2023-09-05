@@ -20,7 +20,7 @@ async function createNewCustomer (customer) {
         password: customer.password
     };
 
-    return await database.execute(query, binds, {});
+    return await database.execute(query, binds, database.options).rows;
 };
 
 async function getLoginInfoFromEmail(email) {

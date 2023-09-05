@@ -13,16 +13,130 @@
         </div>
 
         <form>
-            <input type="text" placeholder="Username" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
+            <input type="text" placeholder="Username" name="name" required>
+            <input type="email" placeholder="Email" name="email" required>
+            <input type="password" name="password" placeholder="Password" required>
             <!-- <a href="">Forgot Password?</a> -->
             <br>
+
+            <div class="errors">
+                <% if (errors.length > 0) { %>
+                        <% for (e of errors) { %> 
+                            <div class="single-error">
+                                <%= e %> <br>
+                            </div>
+                            
+                        <% } %>
+                <% } %>
+            </div> 
+
+            
             <button type="submit" class="btn2">Sign Up As Customer</button>
             <!-- <button type="submit" class="btn1">Sign Up As Admin</button> -->
-            <button type="submit" class="btn3">Sign Up As Publisher</button>            
+            <button type="submit" class="btn3">Sign Up As Publisher</button> 
+
+                    
         </form>
 
     </div>
+    <script>
+        const form = document.querySelector('form');
+        const customerLoginButton = document.querySelector('.btn2');
+
+        customerLoginButton.addEventListener('click', async (e) => {
+            console.log(customerLoginButton);
+            const error_content = document.querySelector('.error');
+
+            console.log('user signup');
+
+            const name = form.name.value;
+            const email = form.email.value;
+            const password = form.password.value;
+            
+            console.log(JSON.stringify({
+                        name,
+                        email,
+                        password
+                    }));
+            
+            e.preventDefault();
+
+            try {
+                const res = await fetch('/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password
+                    })
+                })
+                const data = await res.json();
+                console.log(data);
+                if(data.user != null) {
+                    location.assign('/homepage');
+                }
+                else {
+                    const errorContainer = document.querySelector('.errors');
+                    errorContainer.innerText = '';
+                    data.errors.forEach (e => {
+                        const errorText = document.createElement('div');
+                        errorText.innerText = `${e}`;
+
+                        errorContainer.appendChild(errorText);
+                        console.log(errorContainer);
+                    })
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        })
+
+        const publisherLoginButton = document.querySelector('.btn3');
+        publisherLoginButton.addEventListener('click', async (e) => {
+            console.log(publisherLoginButton);
+            const error_content = document.querySelector('.error');
+
+            console.log('publisher signup');
+
+            const name = form.name.value;
+            const email = form.email.value;
+            const password = form.password.value;
+            
+            console.log(JSON.stringify({
+                        name,
+                        email,
+                        password
+                    }));
+            
+            e.preventDefault();
+
+            try {
+                const res = await fetch('/signup/publisher', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password
+                    })
+                })
+                const data = await res.json();
+                console.log(data);
+                if(data.user != null) {
+                    location.assign('/homepage');
+                }
+                else {
+                    error_content.innerText = data.errors;
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        })
+    </script>
 </body>
 </html>

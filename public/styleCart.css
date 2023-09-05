@@ -2,12 +2,14 @@
 
 
 body {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 30px auto;
     padding: 0 20px;
     font-family: 'Rubik', sans-serif;
     font-family: 'Tiro Bangla', serif;
     font-size: medium;
+    display: flex;
+    align-items: baseline;
 }
 
 .cart-page
@@ -15,9 +17,9 @@ body {
     margin: 80px auto;
 }
 
-table
+.small-container
 {
-    width: 100%;
+    width: 700px;
     border-collapse: collapse;
 }
 
@@ -25,12 +27,14 @@ table
 {
     display: flex;
     flex-wrap: wrap;
+    width: 300px;
 }
 
 th
 {
     text-align: left;
-    padding: 5px;
+    padding: 10px;
+    width: 200px;
     color: #fff;
     background-color: rgb(16, 95, 134);
     font-weight: normal;
@@ -39,13 +43,12 @@ th
 td
 {
     padding: 10px 5px;
+    margin: 20px;
 }
 
 td input
 {
-    width: 40px;
-    height: 30px;
-    padding: 5px;
+    width: 30px;
 }
 
 td a{
@@ -66,12 +69,6 @@ td img
     justify-content: flex-end;
 }
 
-.total-price table
-{
-    border-top: 3px solid #ff523b;
-    width: 100%;
-    max-width: 370px;
-}
 
 td:last-child
 {
@@ -81,4 +78,30 @@ td:last-child
 th:last-child
 {
     text-align: right;
+}
+
+.total-price table
+{
+    background-color: #ff523b;
+    border-top: 3px solid #ff523b;
+    width: 100%;
+    max-width: 400px;
+    padding-right: 200px;
+}
+.del-btn {
+    background-color: #a11604;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+.summary {
+    background-color: aliceblue;
+}
+.total-amt {
+    border-top: 5px solid black;
+}
+.hidden {
+    display: none;
 }

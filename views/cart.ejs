@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
     <link rel="stylesheet" href="/styleCart.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <!-- <h3>Cart</h3> -->
@@ -12,71 +14,159 @@
         <table>
             <tr>
                 <th>Product</th>
+                <th>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images\Kalbela.jpg" alt="Product image" width="60px" height="80px">
-                        <div>
-                            <p>Kaalbela</p>
-                            <small>Price : 200</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>200</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images\1.jpg" alt="Product image" width="60px" height="80px">
-                        <div>
-                            <p>Kaalbela</p>
-                            <small>Price : 450</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>450</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images\Ami_Topu.jpg" alt="Product image" width="60px" height="80px">
-                        <div>
-                            <p>Kaalbela</p>
-                            <small>Price : 250</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>250</td>
-            </tr>
+            
+            <% let sum = 0; %>
+                <% if (cartItems.length > 0) { %>
+                    <% for(let i = 0; i < cartItems.length; i++) { %>
+                        <% sum = sum + cartItems[i].PRICE; %>
+                        <tr>
+                            <td>
+                                <div class="cart-info">
+                                    <img src="images\Kalbela.jpg" alt="Product image" width="60px" height="80px">
+                                    <div>
+                                        <p><%= cartItems[i].TITLE %></p>
+                                        <a href=<%= '/cart/delete/' + cartItems[i].ID %>>Remove</a>
+                                        <div class="hidden" id = <%= 'stock' + cartItems[i].ID %> Out of stock </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <%= cartItems[i].PRICE %>Tk.
+                            </td>
+                            <td>
+                                <button class="rmv-btn" id=<%= 'rmv-btn' + i %>>-</button>
+                                <input class="book-qty" type="text" id=<%= 'input' + i %> value="<%=cartItems[i].QUANTITY  %>">
+                                <button class="add-btn" id=<%= 'add-btn' + i %>>+</button>
+                            </td>
+                            <td id= <%= 'price' + i %>><%= cartItems[i].PRICE %> Tk.
+                            </td>
+                        </tr>
+                        
+                    <% } %>
+                <%}%>
         </table>
 
-        <div class="total-price">
-            <table>
-                <tr>
-                    <td>Total</td>
-                    <td>900</td>
-                </tr>
-            </table>
-        </div>
-    
-    
-    
+         <div>
+            <button class="save" id="action-btn" onclick="sendBookCountUpdate();">Save Changes</button>
+            <button class="order" id="action-btn" onclick="location.assign('/cart/order')">Place order</button>
+         </div>             
+            <!-- <div class="total-price">
+                <table >
+                    <tr>
+                        <td>Total</td>
+                        <td><%= sum %>Tk.</td>
+                    </tr>
+                </table>
+            </div>   -->
+    </div> 
+    <div class="summary">
+        <table>
+            <tr>
+                <td>
+                    Payment summary:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Subtotal: 
+                </td>
+                <td class="subtotal" id="subtotal">
+                    <%= sum %>Tk.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Shipping Charge: 
+                </td>
+                <td>
+                    100Tk.
+                </td>
+            </tr>
+            <tr class="total-amt">
+                <td>
+                    Payable amount: 
+                </td>
+                <td id="total-amt">
+                    <%= sum + 100 %>Tk.
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        let total = 0;
+        let items = <%- JSON.stringify(cartItems) %> ;
+        console.log(items);
+        const btn = document.getElementById(`add-btn0`);
+        console.log(btn);
+
+        for (let i = 0; i < items.length; i++) {
+            console.log(i);
+            total += items[i].PRICE * items[i].QUANTITY;
+            document.getElementById(`add-btn${i}`).onclick = (function (i) {
+                return function() {
+                    console.log(items[i]);
+                    total -= items[i].QUANTITY * items[i].PRICE;
+                    items[i].QUANTITY = Math.min(items[i].QUANTITY + 1, 5);
+                    document.getElementById(`input${i}`).value = items[i].QUANTITY;
+                    total += items[i].QUANTITY * items[i].PRICE;
+                    document.getElementById(`price${i}`).innerText = "Tk. " + items[i].QUANTITY* items[i].PRICE;
+                    console.log('add button');
+                    updateTotals(total);
+                    updateStockStatus();
+                };
+            }) (i);
+            document.getElementById(`rmv-btn${i}`).onclick = (function (i) {
+                return function() {
+                    total -= items[i].QUANTITY * items[i].PRICE;
+                    items[i].QUANTITY = Math.min(items[i].QUANTITY - 1, 1);
+                    document.getElementById(`input${i}`).value = items[i].QUANTITY;
+                    total += items[i].QUANTITY * items[i].PRICE;
+                    document.getElementById(`price${i}`).innerText = "Tk. " + items[i].QUANTITY* items[i].PRICE;
+                    updateTotals(total);
+                    updateStockStatus();
+                }
+            }) (i);
+        }
+
+        function updateTotals(total) {
+            document.getElementById('subtotal').innerText = total + 'Tk.';
+            document.getElementById('total-amt').innerText = (total + 100) + 'Tk.';
+        }
+
+        updateTotals(total);
+        updateStockStatus();
+
+        function sendBookCountUpdate() {
+            $.ajax ( {
+                url: `/cart/update`,
+                type: 'POST',
+                data: {items: JSON.stringify(items)},
+                // status code and toast
+            });
+        }
+
+        function updateStockStatus() {
+            let outOfStock = 0;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].QUANTITY > items[i].STOCK) {
+                    outOfStock ++;
+
+                    let stocks = document.getElementById(`stock`, items[i].ID);
+                    if(!stocks.classList.contains('hidden')) {
+                        stocks.classList.toggle('hidden');
+                    }
+                }
+            }
+            if(outOfStock > 0) {
+                if(!document.getElementById('action-btn').classList.contains('disabled')) {
+                    document.getElementById('action-btn').classList.toggle('disabled');
+                }
+            }
+        }
+    </script>
 </body>
-
-
-
-
-</div>
 </html>

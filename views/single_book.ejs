@@ -10,6 +10,27 @@
 </head>
 <body>
     <div class="header-section">
+        <div class="upper-line">
+            <div class="logo">
+                <img src="/images/Logo.jpg" alt="logo image" >
+            </div>
+            <div class="search-bar">
+                <form action="/search" method="POST">
+                    <input type="text" name="search_text" placeholder="Search books, writers...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <!-- <button onclick="location.assign('/login')">Log In</button>
+                <button onclick="location.assign('/signup')">Sign Up</button> -->
+                
+                <a href="/cart">
+                    <img class="cart-image" src="/images/cart.jpg" alt="cart image" >
+                </a>
+                <button onclick="location.assign('/logout')">Log Out</button>
+                
+            </div>
+        </div>
         <div class="lower-line">
             <nav>
                 <ul>
@@ -84,23 +105,39 @@
     
     
     <script> 
-        const button = document.getElementById('cart-post');
-        console.log(button);
+        const cart_button = document.getElementById('cart-post');
+        console.log(cart_button);
         
         let id = '<%= books[0].ID %>';
-        // function addToCart() {
-        //     console.log('ajax');
-        //     $.ajax ( {
-        //         url: `/cart/${id}`,
-        //         type: 'POST'
-        //     });
-        //     console.log('add to cart');
-        // }
 
-        button.addEventListener('click', async(e) => {
+        cart_button.addEventListener('click', async(e) => {
             e.preventDefault();
             try {
             const res = await fetch(`/cart/${id}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            console.log(data);
+            if(data.user == null) {
+                location.assign('/login');
+            }
+            else {
+                console.log('success! adding');
+            }
+        }
+        catch(err) {
+            console.log(err);
+        }
+        })
+
+        const wishlist_button = document.getElementById('wishlist-post');
+        console.log(wishlist_button);
+
+        wishlist_button.addEventListener('click', async(e) => {
+            e.preventDefault();
+            try {
+            const res = await fetch(`/wishlist/${id}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'}
             });

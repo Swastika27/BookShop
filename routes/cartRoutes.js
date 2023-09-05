@@ -4,8 +4,29 @@ const Db_cart = require('../database/cartQuery');
 
 const router = Router( { mergeParams: true } );
 
-router.get('/', (req, res) => {
-    res.render('cart');
+router.post('/update', async (req, res) => {
+    const items = JSON.parse(req.body.items);
+    if(req.user == null) {
+        res.writeHead(302, {'Location': '/login'})
+    }
+    for(let i = 0; i < items.length; i++) {
+        await Db_cart.updateQuantity(items[i].ID, items[i].QUANTITY, req.user.id);
+    }
+    return res.sendStatus(200);
+})
+
+router.get('/', async (req, res) => {
+    if(req.user == null) {
+        console.log('cart: ' , 'user not logged in');
+        res.redirect('/login');
+    }
+    else {
+        const cartData = await Db_cart.getCartAllInfoFromId(req.user.id);
+        console.log(cartData);
+        res.render('cart', {
+            cartItems: cartData
+        });
+    }
 })
 
 router.post('/:id', async(req, res) => {
@@ -16,22 +37,43 @@ router.post('/:id', async(req, res) => {
             user: null
         })
     }
-
+// check if user has cart
     console.log('user logged in');
+    const hasCart = await Db_cart.getActiveCart(req.user.id);
+    if(hasCart.length === 0) {
+        Db_cart.assignNewCart(req.user.id);
+    }
     const isAdded = await Db_cart.isAlreadyAdded(req.user.id, req.params.id);
     console.log('isadded', isAdded);
     if(isAdded == null) {
-        console.log('addin to cart')
-
-        console.log('user ', req.user.id);
-        console.log('book ', req.params.id);
-        
+        console.log('addin to cart');        
         await Db_cart.addToCart(req.user.id, req.params.id);
         return res.sendStatus(200);
     }
     else {
         return res.sendStatus(204);
     }
+})
+
+router.get('/delete/:id', async (req, res) => {
+    if(req.user == null) {
+        res.redirect('/login');
+    }
+
+    await Db_cart.deleteBookFromCart(req.params.id, req.user.id);
+    return res.redirect('/cart');
+})
+
+router.get('/order', async (req, res) => {
+    if(req.user === null) {
+        return res.redirect('/login');
+    }
+
+    const customer_id = req.user.id;
+    const cart_id = (await Db_cart.getActiveCart(customer_id))[0].ID;
+    console.log(cart_id);
+
+    res.render('order_form.ejs');
 })
 
 module.exports = router;

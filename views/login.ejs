@@ -20,23 +20,22 @@
     
             <input type="password" name="password" placeholder="Password" value="<%= (typeof form != 'undefined') ? form.password:'' %>" required>
     
-            <% if (errors.length > 0) { %>
-                <ul>
-                    <% for (e of errors) { %>
-                        <li> <%= e %> </li>
-                    <% } %>
-                </ul>
-            <% } %>
-
-            <br>
-            <button type="submit" class="btn2">Sign Up As Customer</button>
-            <button type="submit" class="btn1">Sign Up As Admin</button>
-            <button type="submit" class="btn3">Sign Up As Publisher</button>  
+            <div class="errors">
+                <% if (errors.length > 0) { %>
+                    <ul>
+                        <% for (e of errors) { %>
+                            <li> <%= e %> </li>
+                        <% } %>
+                    </ul>
+                <% } %>
+            </div>
+            <!-- <br>
+            <button type="submit" class="btn2">Log in As Customer</button> -->
+            <button type="submit" class="btn1">Log in</button>
+            <!-- <button type="submit" class="btn3">Log in As Publisher</button> -->
     
         </form>
 
     </div>
-    
-    
 </body>
 </html>
