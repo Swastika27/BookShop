@@ -12,7 +12,7 @@
             <span>Sign Up</span>
         </div>
 
-        <form>
+        <form action="/signup" method="post">
             <input type="text" placeholder="Username" name="name" required>
             <input type="email" placeholder="Email" name="email" required>
             <input type="password" name="password" placeholder="Password" required>
@@ -33,13 +33,13 @@
             
             <button type="submit" class="btn2">Sign Up As Customer</button>
             <!-- <button type="submit" class="btn1">Sign Up As Admin</button> -->
-            <button type="submit" class="btn3">Sign Up As Publisher</button> 
+            <!-- <button type="submit" class="btn3">Sign Up As Publisher</button>  -->
 
                     
         </form>
 
     </div>
-    <script>
+    <!-- <script>
         const form = document.querySelector('form');
         const customerLoginButton = document.querySelector('.btn2');
 
@@ -137,6 +137,6 @@
                 console.log(err);
             }
         })
-    </script>
+    </script> -->
 </body>
 </html>
