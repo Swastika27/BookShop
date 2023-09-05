@@ -1,8 +1,8 @@
-require('dotenv').config();
+
 
 const app = require('./app');
 const database = require('./database/database');
-const port = process.env.PORT;
+const port = 3000;
 
 process.env.UV_THREADPOOL_SIZE = 10;
 
