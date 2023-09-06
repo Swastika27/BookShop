@@ -52,7 +52,8 @@
 
          <div>
             <button class="save" id="action-btn" onclick="sendBookCountUpdate();">Save Changes</button>
-            <button class="order" id="action-btn" onclick="location.assign('/cart/order')">Place order</button>
+            <button class="order" id="action-btn" onclick="sendBookCountUpdate();
+            location.assign('/cart/order')">Place order</button>
          </div>             
             <!-- <div class="total-price">
                 <table >

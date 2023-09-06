@@ -38,7 +38,7 @@ async function getLoginInfoFromEmail(user_email) {
     try {
         const result = await database.execute(query, binds, database.options);
         if (result && result.rows) {
-            console.log('error in databasse ' + result.rows);
+            console.log('error in databasse ' + result);
             return result.rows;
         } else {
             throw new Error('No rows returned from the query');

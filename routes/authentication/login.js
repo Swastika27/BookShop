@@ -67,8 +67,9 @@ router.post('/', async (req, res) => {
             res.render('login', {
                 title: 'Login',
                 user: null,
-                errors: [],
+                errors: error,
                 form: {
+                    name: req.body.name,
                     email: req.body.email,
                     password: req.body.password
                 }

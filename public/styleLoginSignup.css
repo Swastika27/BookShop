@@ -86,3 +86,8 @@ form .btn3
     color: white;
     border-radius: 10px;
 }
+
+ul  {
+    list-style: none;
+    color: red;
+}

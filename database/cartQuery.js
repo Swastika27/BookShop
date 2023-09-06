@@ -30,13 +30,13 @@ async function assignNewCart(customer_id) {
 async function isAlreadyAdded(customer_id, book_id) {
     console.log('is already added');
     const cartId = await getActiveCart(customer_id);
-    console.log('cartid ', cartId);
     if(cartId.length > 0) {
         const query = `SELECT BOOK_ID FROM CARTITEMS WHERE CART_ID = :cid AND BOOK_ID = :b_id`;
         const binds = {
             cid: cartId[0].ID,
             b_id: book_id
         };
+        console.log(binds);
         const data = await database.execute(query, binds, database.options);
         console.log(data);
         if (data.rows.length > 0) {

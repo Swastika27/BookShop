@@ -13,10 +13,10 @@
             <span>Order</span>
         </div>
 
-        <form action="/order" method="post">
-            <input type="text" placeholder="Name" required>
-            <input type="text" placeholder="Address" required>
-            <input type="tel" placeholder="Phone Number" required>
+        <form action="/cart/confirmOrder" method="post">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="text" name="address" placeholder="Address" required>
+            <input type="tel" name="phone" placeholder="Phone Number" required>
             <br>
             <button type="submit" class="btn2">Confirm Order</button>        
         </form>

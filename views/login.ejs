@@ -19,6 +19,9 @@
             <input type="email" name="email" placeholder="Email" value="<%= (typeof form != 'undefined') ? form.email:''%>" required>
     
             <input type="password" name="password" placeholder="Password" value="<%= (typeof form != 'undefined') ? form.password:'' %>" required>
+            <br>
+            <br>
+            <div>Don't have an account? <a href="/signup">Signup</a></div>
     
             <div class="errors">
                 <% if (errors.length > 0) { %>

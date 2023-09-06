@@ -1,6 +1,7 @@
 const { Router } = require('express');
 
 const Db_cart = require('../database/cartQuery');
+const Db_order = require('../database/orderQuery');
 
 const router = Router( { mergeParams: true } );
 
@@ -27,6 +28,15 @@ router.get('/', async (req, res) => {
             cartItems: cartData
         });
     }
+})
+
+
+router.post('/confirmOrder', async (req, res) => {
+    if(req.user == null) {
+        return res.redirect('/login');
+    }
+    await Db_order.confirmOrder(req.user.id, req.body);
+    return res.redirect('/homepage');
 })
 
 router.post('/:id', async(req, res) => {
@@ -75,5 +85,6 @@ router.get('/order', async (req, res) => {
 
     res.render('order_form.ejs');
 })
+
 
 module.exports = router;
