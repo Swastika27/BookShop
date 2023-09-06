@@ -123,7 +123,7 @@
             document.getElementById(`rmv-btn${i}`).onclick = (function (i) {
                 return function() {
                     total -= items[i].QUANTITY * items[i].PRICE;
-                    items[i].QUANTITY = Math.min(items[i].QUANTITY - 1, 1);
+                    items[i].QUANTITY = Math.max(items[i].QUANTITY - 1, 1);
                     document.getElementById(`input${i}`).value = items[i].QUANTITY;
                     total += items[i].QUANTITY * items[i].PRICE;
                     document.getElementById(`price${i}`).innerText = "Tk. " + items[i].QUANTITY* items[i].PRICE;
