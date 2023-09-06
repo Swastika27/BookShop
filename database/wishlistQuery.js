@@ -3,7 +3,7 @@ const { isAlreadyAdded } = require('./cartQuery');
 const database = require('./database');
 
 async function getAllBooks(user_id) {
-    const query = `SELECT BOOK.ID AS ID, TITLE, GENRE, NAME AS WRITER_NAME
+    const query = `SELECT BOOK.ID AS ID, book.Price as price, TITLE, GENRE, NAME AS WRITER_NAME
                     FROM BOOK
                     JOIN WRITER 
                     ON (BOOK.WRITER_ID = WRITER.ID)
@@ -51,7 +51,7 @@ async function addToWishlist(user_id, book_id) {
 async function deleteFromWishlist(user_id, book_id) {
     const query = `DELETE FROM WISHLISTS 
                     WHERE CUSTOMER_ID = :c_id 
-                    AND BOOK_ID = b_id`;
+                    AND BOOK_ID = :b_id`;
     const binds = {
         c_id: user_id,
         b_id: book_id

@@ -42,6 +42,7 @@ router.get('/delete/:id', async (req, res) => {
     }
     try{    
         await Db_wishlist.deleteFromWishlist(req.user.id, req.params.id);
+        res.redirect('/wishlist');
     }
     catch (err) {
         console.log(err);

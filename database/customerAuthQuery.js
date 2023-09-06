@@ -12,8 +12,11 @@ async function getUserIdFromEmail(email) {
 };
 
 async function createNewCustomer (customer) {
-    const query = `INSERT INTO CUSTOMERS(CUSTOMER_NAME, CUSTOMER_EMAIL, CUSTOMER_PASSWORD) 
-    VALUES (:name, :email, :password)`;
+    const query = `BEGIN 
+    INSERT INTO CUSTOMERS(CUSTOMER_NAME, CUSTOMER_EMAIL, CUSTOMER_PASSWORD) 
+    VALUES (:name, :email, :password);
+    COMMIT;
+    END; `;
     const binds = {
         name : customer.name,
         email: customer.email,
@@ -23,15 +26,28 @@ async function createNewCustomer (customer) {
     return await database.execute(query, binds, database.options).rows;
 };
 
-async function getLoginInfoFromEmail(email) {
-    const query = `SELECT ID, CUSTOMER_NAME, CUSTOMER_PASSWORD 
-    From Customers
+async function getLoginInfoFromEmail(user_email) {
+    console.log('email ', user_email);
+    const query = `select *
+    from customers
     WHERE CUSTOMER_EMAIL = :email`;
     binds = {
-        email
+        email: user_email
     };
 
-    return (await database.execute(query, binds, database.options)).rows;
+    try {
+        const result = await database.execute(query, binds, database.options);
+        if (result && result.rows) {
+            console.log('error in databasse ' + result.rows);
+            return result.rows;
+        } else {
+            throw new Error('No rows returned from the query');
+        }
+    } catch (error) {
+        console.error('Database query error:', error);
+        // Handle the error, return an error response, or rethrow the error.
+    }
+    
 };
 
 async function getLoginInfoFromId (id) {

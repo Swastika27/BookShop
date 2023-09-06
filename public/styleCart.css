@@ -105,3 +105,7 @@ th:last-child
 .hidden {
     display: none;
 }
+
+.actions {
+    width: 150px;
+}

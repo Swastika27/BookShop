@@ -79,12 +79,23 @@ router.post('/', async (req, res) => {
             const hashedPassword = await bcrypt.hash(user.password, salt);
             console.log('no error hashing');
             user.password = hashedPassword;
-            let result = await Db_auth.createNewCustomer(user);
-            console.log(user);
-            console.log('goin to find new user');
-            let result2 = await Db_auth.getLoginInfoFromEmail(user.email);
-            console.log('new user found ', result2);
-            await authUtils.loginUser(res, result2[0].ID);
+            // let result = await Db_auth.createNewCustomer(user);
+            // console.log(user);
+            // console.log('goin to find new user');
+            // let result2 = await Db_auth.getLoginInfoFromEmail(user.email);
+            // console.log('new user found ', result2);
+            // await authUtils.loginUser(res, result2[0].ID);
+            try {
+                let result = await Db_auth.createNewCustomer(user);
+                console.log(user);
+                console.log('going to find new user');
+                let result2 = await Db_auth.getLoginInfoFromEmail(user.email);
+                console.log('new user found ', result2);
+                await authUtils.loginUser(res, result2[0].ID);
+              } catch (error) {
+                console.error('Error:', error);
+                // Handle the error, e.g., return an error response.
+              }
             // redirect to home page
             console.log('redirect to home page');
             res.redirect('/homepage')

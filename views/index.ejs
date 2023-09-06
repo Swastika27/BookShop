@@ -1,99 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BitLit Book | Online Bookshop</title>
-    <link rel="stylesheet" href="/styles2.css">
-    <link rel="stylesheet" href="/filter.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
+<html lang="en"> 
+<%- include('./partials/index_head.ejs') %>
 
 <body>
-    <div class="header-section">
-        <div class="upper-line">
-            <div class="logo">
-                <img src="/images/Logo.jpg" alt="logo image" >
-            </div>
-            <div class="search-bar">
-                <form action="/search" method="POST">
-                    <input type="text" name="search_text" placeholder="Search books, writers...">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
-            <div >
-                <button onclick="location.assign('/login')">Log In</button>
-                <button onclick="location.assign('/signup')">Sign Up</button>
-            </div>
-        </div>
-
-        <div class="lower-line">
-            <nav>
-                <ul>
-                    <li><a href="/books">Books</a></li>
-                    <li><a href="/writers">Writers</a></li>
-                    <li><a href="/publishers">Publishers</a></li>
-                </ul>
-            </nav>
-        </div>
-        
-    </div>
+    <%- include('./partials/index_header.ejs') %>
 
     <div class="main-section">
-        <div class="filter-section">
-            <div class="container">
-                <div class="select-btn sort">
-                    <span class="btn-text">Sort by</span>
-                </div>
-                <ul class="radio-options">
-                    <li>
-                        <input type="radio" name="price" value="asc">Price ascending
-                    </li>
-                    <li>
-                        <input type="radio" name="price" value="desc">Price descending
-                    </li>
-                </ul>
-            </div>
-            <div class="container">
-                <div class="select-btn genre">
-                    <span class="btn-text genre">Select genre</span>
-                    <span class="arrow-down">
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </span>
-                </div>
-
-                <ul class="list-items">
-                    <%genres.forEach(genre => { %>
-                        <li class="item genre">
-                            <span class="checkbox">
-                                <i class="fa-solid fa-check check-icon"></i>
-                            </span>
-                            <span class="item-text"><%= genre.GENRE %></span>
-                        </li>
-                    <%})%>
-                </ul>
-            </div>
-            <p>container divider</p>
-            <div class="container">
-                <div class="select-btn author">
-                    <span class="btn-text author">Select author</span>
-                    <span class="arrow-down">
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </span>
-                </div>
-
-                <ul class="list-items">
-                    <%authors.forEach(author => { %>
-                        <li class="item author">
-                            <span class="checkbox">
-                                <i class="fa-solid fa-check check-icon"></i>
-                            </span>
-                            <span class="item-text"><%= author.NAME %></span>
-                        </li>
-                    <%})%>
-                </ul>
-            </div>
-        </div>
+        <%- include('./partials/filter.ejs') %>
         
         <div class="items-section">
             <div class="book-header">

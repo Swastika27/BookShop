@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
+    <title>wishlist</title>
     <link rel="stylesheet" href="/styleCart.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -41,9 +41,10 @@
                             <td>
                                 <%= items[i].PRICE %>Tk.
                             </td>
-                            <td>
-                                <button>Add to Cart</button><br>
-                                <button>Delete</button>
+                            <td class="actions">
+                                <button class="login-button" id=<%= 'add-cart' + items[i].ID%>>Add to Cart</button>
+                                <!-- <a href=<%= '/cart/' + items[i].ID %>>Add to cart</> -->
+                                <a href=<%= '/wishlist/delete/' + items[i].ID %>>Remove</a>
                             </td>
                         </tr>
                         
@@ -51,5 +52,37 @@
                 <%}%>
         </table>
     </div>
+    <script>
+        // const cart_button = document.getElementById('cart-post');
+        // console.log(cart_button);
+
+        let items = <%- JSON.stringify(items) %> ;
+        console.log(items);           
+        for(let i = 0;i < items.length; i++) {
+            document.getElementById(`add-cart${items[i].ID}`) .onclick = (function(i) {
+                return async function() {
+                    try {
+                        const res = await fetch (`/cart/${items[i].ID}`, {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'}
+                        })
+                        const data = await res.json();
+                        console.log('addto cart ', data);
+                        if(data.user == null) {
+                            location.assign('/login');
+                        }
+                        else {
+                            console.log('added ');
+                            location.assign('/wishlist');
+                        }
+                    }
+                    catch (err) {
+                        console.log(err);
+                    }
+                };
+            }) (i);
+        }
+        
+    </script>
 </body>
 </html>

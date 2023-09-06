@@ -29,18 +29,14 @@
                 <% let count = 0; %>
                 <div class="all-writers-line">
                     <% writers.forEach(writer => { %>
-                            &nbsp; &nbsp; &nbsp; &nbsp; 
                              
                             <a href="/writers/<%=writer.ID %>">
-                            <br>
-                            <br>
                             
                             <img src="/images/default_writer.jpg" alt="default" width="150" height="200">
                             <p><%= writer.NAME %></p>
                             
                             <!-- &nbsp; -->
                             </a>
-                            &nbsp; &nbsp; &nbsp; &nbsp;
                         <% count++; %>
                         <% if (count === 5) { %>
                             </div><div class="all-writers-line">

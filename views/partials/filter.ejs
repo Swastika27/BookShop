@@ -1,0 +1,54 @@
+<div class="filter-section">
+    <div class="container">
+        <div class="select-btn sort">
+            <span class="btn-text">Sort by</span>
+        </div>
+        <ul class="radio-options">
+            <li>
+                <input type="radio" name="price" value="asc">Price ascending
+            </li>
+            <li>
+                <input type="radio" name="price" value="desc">Price descending
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="select-btn genre">
+            <span class="btn-text genre">Select genre</span>
+            <span class="arrow-down">
+                <i class="fa-solid fa-chevron-down"></i>
+            </span>
+        </div>
+
+        <ul class="list-items">
+            <%genres.forEach(genre => { %>
+                <li class="item genre">
+                    <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text"><%= genre.GENRE %></span>
+                </li>
+            <%})%>
+        </ul>
+    </div>
+    <p>container divider</p>
+    <div class="container">
+        <div class="select-btn author">
+            <span class="btn-text author">Select author</span>
+            <span class="arrow-down">
+                <i class="fa-solid fa-chevron-down"></i>
+            </span>
+        </div>
+
+        <ul class="list-items">
+            <%authors.forEach(author => { %>
+                <li class="item author">
+                    <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text"><%= author.NAME %></span>
+                </li>
+            <%})%>
+        </ul>
+    </div>
+</div>

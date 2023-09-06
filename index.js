@@ -1,8 +1,9 @@
-
+// configuring .env variables
+require('dotenv').config();
 
 const app = require('./app');
 const database = require('./database/database');
-const port = 3000;
+const port = process.env.port;
 
 process.env.UV_THREADPOOL_SIZE = 10;
 

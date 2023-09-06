@@ -41,21 +41,6 @@
         </div>
 
         <div class="items-section">
-        <!-- <ul class="publisher-grid">
-            <% if(publishers.length > 0) { %>
-                <% let count = 0; %>
-                <div class="publisher-line">
-                    <% publishers.forEach(publisher => { %>
-                        <li><a href="/publishers/<%= publisher.NAME %>"><%= publisher.NAME %></a></li>
-                        <% count++; %>
-                        <% if (count === 4) { %>
-                            </div><div class="publisher-line">
-                            <% count = 0; %>
-                        <% } %>
-                    <% }) %>
-                </div>
-            <% } %>
-        </ul> -->
             <div class="display-publishers">
                 <% if(publishers.length > 0) { %>
                     <% publishers.forEach(publisher => { %>
