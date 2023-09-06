@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const DB_auth = require('../database/customerAuthQuery');
+const DB_auth_publisher = require('../database/publisherAuthQuery');
 
 function auth(req, res, next){
     req.user = null;
@@ -39,6 +40,67 @@ function auth(req, res, next){
     }   
 }
 
+function adminAuth(req, res, next) {
+    req.admin = null;
+
+    if(req.cookies.adminSessionToken) {
+        let token = req.token.adminSessionToken;
+        jwt.verify(token, process.env.APP_SECRET, async (err, decoded) => {
+            if(err) {
+                console.log("error at verifying token: ", err);
+                next();
+            } else {
+                const decodedId = decoded.superId;
+
+                if(decodedId !== 227) {
+                    console.log('error admin');
+                } 
+                else {
+                    req.admin = {
+                        NAME: 'ADMIN'
+                    }
+                }
+                next();
+            }
+        })
+    } else {
+        next();
+    }
+}
+
+function publisherAuth(req, res, next) {
+    req.publisher = null;
+    if(req.cookies.publisherSessionToken) {
+        let token = req.cookies.publisherSessionToken;
+
+        jwt.verify(token, process.env.APP_SECRET, async (err, decoded) => {
+            if(err) {
+                console.log('Error publisher');
+                next();
+            } else {
+                const decodedId = decoded.email; // publisher email
+
+                let results = await DB_auth_publisher.getInfoFromName(decodedId);
+
+                if(results.length == 0) {
+                    next();
+                }
+                else {
+                    req.publihser = {
+                        name: results[0].NAME,
+                        email: results[0].EMAIL
+                    }
+                }
+                next();
+            }
+        })
+    } else {
+        next();
+    }
+}
+
 module.exports = {
-    auth
+    auth,
+    adminAuth,
+    publisherAuth
 }
