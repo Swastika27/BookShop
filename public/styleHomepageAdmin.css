@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&family=Tiro+Bangla&display=swap');
+
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Tiro Bangla', serif;
+    /* font-size: medium;    */
+} 
+
+/* body {
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 20px;
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Tiro Bangla', serif;
+    font-size: medium;    
+} */
+
+li{
+    list-style: none;
+}
+
+h1, h2 
+{
+    color: #000000;
+}
+
+.side-menu{
+    position: fixed;
+    background-color: #266398;
+    width: 20vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-menu .brand-name
+{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.side-menu li
+{
+    font-size: 24px;
+    padding: 10px 40px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.side-menu li:hover
+{
+    background: white;
+    color: #266398;
+}
+
+.container
+{
+    position: absolute;
+    right: 0;
+    width: 80vw;
+    height: 100vh;
+}
+
+.container .header
+{
+    background: radial-gradient(#fff, #3185a1);
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80vw;
+    height: 10vh;
+}
+
+.container .header .nav .search-bar 
+{
+    padding-top: 10px;
+    position: relative;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1; 
+    width: 100%; 
+    height: 60px; 
+    
+}
+
+.container .header .nav .search-bar input[type="text"] {
+    
+    margin-right: 10px;
+    padding: 10px; 
+    font-size: 16px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    width: 500px;
+}
+
+.container .content 
+{
+    /* padding-left: 340px; */
+    padding-top: 100px;
+    background: white;
+    min-height: 80vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+
+.container .content .book-list
+{
+    min-height: 80vh;
+    flex: 5;
+    background: white;
+    margin: 0 25px 25px 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+}
+
+table
+{
+    padding: 10px;
+    border-collapse: collapse;
+}
+
+th, 
+td 
+{
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
