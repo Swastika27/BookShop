@@ -1,6 +1,6 @@
 const database = require('./database');
 
-async function getInfoFromName( user_email) {
+async function getInfoFromEmail( user_email) {
     const query = `SELECT * FROM PUBLISHER
                     WHERE email = :email`;
     const binds = {
@@ -11,5 +11,5 @@ async function getInfoFromName( user_email) {
 }
 
 module.exports = {
-    getInfoFromName
+    getInfoFromEmail
 }

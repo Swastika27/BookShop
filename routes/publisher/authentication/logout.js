@@ -4,8 +4,8 @@ const router = Router({mergeParams: true});
 
 router.post('/', async (req, res) => {
     if(req.admin !== null) {
-        res.clearCookie('publisherSessionToken');
-        res.redirect('/publisher/login');
+        res.clearCookie('adminSessionToken');
+        res.redirect('/admin/login');
     }
 })
 

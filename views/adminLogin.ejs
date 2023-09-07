@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styleLoginSignup.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-btn">
+            <span>Log In</span>
+        </div>
+
+        <form action="/admin/login" method="POST">
+
+            <!-- <input type="text" name="name" placeholder="Username"  value="<%= (typeof form != 'undefined') ? form.name:''%>" required> -->
+    
+            <input type="email" name="email" placeholder="Email" value="<%= (typeof form != 'undefined') ? form.email:''%>" required>
+    
+            <input type="password" name="password" placeholder="Password" value="<%= (typeof form != 'undefined') ? form.password:'' %>" required>
+            <br>
+            <br>
+            <!-- <div>Don't have an account? <a href="/signup">Signup</a></div> -->
+    
+            <div class="errors">
+                <% if (errors.length > 0) { %>
+                    <ul>
+                        <% for (e of errors) { %>
+                            <li> <%= e %> </li>
+                        <% } %>
+                    </ul>
+                <% } %>
+            </div>
+            <!-- <br>
+            <button type="submit" class="btn2">Log in As Customer</button> -->
+            <button type="submit" class="btn1">Log in</button>
+            <!-- <button type="submit" class="btn3">Log in As Publisher</button> -->
+    
+        </form>
+
+    </div>
+</body>
+</html>

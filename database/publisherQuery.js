@@ -18,7 +18,20 @@ async function getPublisherByName(publisher_name) {
     return (await database.execute(query, binds, database.options)).rows;
 };
 
+async function getAllWritersOfPublisher(publisher_name) {
+    const query = `select * from writer 
+                    where id in (
+                        select writer_id 
+                        from book 
+                        where publisher = :name
+                    )`;
+    const binds = {
+        name: publisher_name
+    }
+} 
+
 module.exports = {
     getAllPublishers,
-    getPublisherByName
+    getPublisherByName,
+    getAllWritersOfPublisher
 }

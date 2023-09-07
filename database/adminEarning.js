@@ -2,18 +2,18 @@ const database = require('./database');
 
 async function getEarningByMonth() {
     const query = `SELECT TO_CHAR(ORDERS.DATE_DELIVERED, 'YYYY-MM') AS YEARMONTH, SUM(CARTITEMS.QUANTITY) AS TOTAL_SOLD, SUM(CARTITEMS.QUANTITY*BOOK.PRICE) AS TOTAL_EARNING
-                    FROM CARTITEMS, BOOK
+                    FROM CARTITEMS, BOOK, orders
                     WHERE (BOOK.ID IN (
                         SELECT CARTITEMS.BOOK_ID 
                         FROM CARTITEMS
                         WHERE (CARTITEMS.CART_ID IN (
                             SELECT CART_ID
                             FROM ORDERS
-                            WHERE (TOUPPER(PAYMENT_STATUS) = 'PAID')
+                            WHERE (UPPER(PAYMENT_STATUS) = 'PAID')
                         )
                         )
                     ))
-                    GROUP BY TO_CHAR(ORDERS.DATE_DELIVERED, 'YYYY-MM')
+                    GROUP BY TO_CHAR(DATE_DELIVERED, 'YYYY-MM')
                     ORDER BY YEARMONTH`;
     const binds = {}
     return (await database.execute(query, binds, database.options)).rows;
@@ -39,15 +39,15 @@ async function getYearlyEarning() {
 }
 
 async function getLastMonthEarnings() {
-    const query = `SELECT TO_CHAR(ORDERS.DATE_DELIVERED, 'MON') AS MONTH, SUM(CARTITEMS.QUANTITY) AS TOTAL_SOLD, SUM(CARTITEMS.QUANTITY*BOOK.PRICE) AS TOTAL_EARNING
-    FROM CARTITEMS, BOOK
+    const query = `SELECT TO_CHAR(ORDERS.DATE_DELIVERED, 'MON') AS MONTH, TO_CHAR(ORDERS.DATE_DELIVERED, 'yy') AS year, SUM(CARTITEMS.QUANTITY) AS TOTAL_SOLD, SUM(CARTITEMS.QUANTITY*BOOK.PRICE) AS TOTAL_EARNING
+    FROM CARTITEMS, BOOK, orders
     WHERE (BOOK.ID IN (
         SELECT CARTITEMS.BOOK_ID 
         FROM CARTITEMS
         WHERE (CARTITEMS.CART_ID IN (
             SELECT CART_ID
             FROM ORDERS
-            WHERE (TOUPPER(PAYMENT_STATUS) = 'PAID')
+            WHERE (UPPER(PAYMENT_STATUS) = 'PAID')
         )
         )
     )) AND (TRUNC(SYSDATE, ORDERS.DATE_DELIVERED) <= 30)

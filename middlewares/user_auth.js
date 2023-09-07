@@ -44,7 +44,7 @@ function adminAuth(req, res, next) {
     req.admin = null;
 
     if(req.cookies.adminSessionToken) {
-        let token = req.token.adminSessionToken;
+        let token = req.cookies.adminSessionToken;
         jwt.verify(token, process.env.APP_SECRET, async (err, decoded) => {
             if(err) {
                 console.log("error at verifying token: ", err);
@@ -80,13 +80,14 @@ function publisherAuth(req, res, next) {
             } else {
                 const decodedId = decoded.email; // publisher email
 
-                let results = await DB_auth_publisher.getInfoFromName(decodedId);
+                let results = await DB_auth_publisher.getInfoFromEmail(decodedId);
+                console.log(results);
 
                 if(results.length == 0) {
                     next();
                 }
                 else {
-                    req.publihser = {
+                    req.publisher = {
                         name: results[0].NAME,
                         email: results[0].EMAIL
                     }

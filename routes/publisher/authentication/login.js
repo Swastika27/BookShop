@@ -1,14 +1,16 @@
 const {Router} = require('express');
 const bcrypt = require('bcrypt');
 const authUtils = require('../../../utils/authUtils');
-const DB_admin = require('../../../database/adminAuthQuery');
+const DB_publisher = require('../../../database/publisherAuthQuery');
 
 const router = Router({mergeParams: true});
 
 router.get('/', (req, res) => {
-    if(req.admin == null) {
-        return res.render('adminLogin.ejs', {
-            title: 'Admin-login',
+    if(req.publisher == null) {
+        console.log('i publisher null');
+        // console.log(req);
+        return res.render('publisherLogin.ejs', {
+            title: 'Publisher-login',
             user: null,
             form: {
                 email: '', 
@@ -18,27 +20,28 @@ router.get('/', (req, res) => {
         })
     }
     else {
-        res.redirect('/admin');
+        res.redirect('/publisher');
     }
 });
 
 router.post('/', async (req, res)=> {
-    if(req.admin == null) {
+    if(req.publisher == null) {
         let data = [];
         let error = [];
 
-        data = await DB_admin.getInfoFromEmail(req.body.email);
+        data = await DB_publisher.getInfoFromEmail(req.body.email);
 
         console.log('data ', data);
         if(data.length == 0) {
-            error.push('admin not found');
+            error.push('publisher not found');
         }
         else {
             const isSamePassword = await bcrypt.compare(req.body.password, data[0].PASSWORD);
             console.log(req.body.password);
             console.log(isSamePassword);
             if(isSamePassword) {
-                await authUtils.loginAdmin(res, 227);
+                await authUtils.loginPublisher(res, data[0].EMAIL);
+                console.log('publisher logged in');
             }
             else {
                 error.push('Incorrect Credendials');
@@ -46,11 +49,11 @@ router.post('/', async (req, res)=> {
         }
 
         if(error.length == 0) {
-            res.redirect('/admin')
+            res.redirect('/publisher')
         }
         else {
-            res.render('adminLogin.ejs', {
-                title: 'admin-login',
+            res.render('publisherLogin.ejs', {
+                title: 'publisher-login',
                 errors: error,
                 form: {
                     email: req.body.email,
@@ -60,7 +63,7 @@ router.post('/', async (req, res)=> {
         }
     } 
     else {
-        res.redirect('/admin');
+        res.redirect('/publisher');
     }
 });
 
