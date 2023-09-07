@@ -62,3 +62,39 @@ form .btn1
     color: white;
     border-radius: 10px;
 }
+
+
+/* --------Add Writer---------- */
+
+.form-container-1
+{
+    background: radial-gradient(#fff, #6ecddd);
+    width: 500px;
+    height: 250px;
+    position: absolute;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 100px;
+    margin-left: 350px;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, .1);
+    border-radius: 10px;
+}
+
+.form-container-1 span
+{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0 10px;
+    color: #020306;
+    cursor: pointer;
+    width: 100px;
+    display: inline-block;
+}
+
+.form-container-1 form 
+{
+    max-width: 500px;
+    padding: 0 20px;
+    position: absolute;
+    top: 70px;
+}
