@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/styleHomepageAdmin.css">
+</head>
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+            <h1>BitLit Books</h1>
+        </div>
+        <ul>
+            <li>Home</li>
+            <li>Books</li>
+            <li>Writers</li>
+            <li>Publishers</li>
+            <li>Orders</li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                 <div class="search-bar">
+                    <form action="/search" method="POST">
+                        <input type="text" name="search_text" placeholder="Search books...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div> 
+            </div>
+        </div>
+        <div class="content">
+            <div class="book-list">
+                <table>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Writer</th>
+                        <th>Publisher</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Sold</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>Image 1 </td>
+                        <td>name 1 </td>
+                        <td>Writer 1 </td>
+                        <td>Publisher 1 </td>
+                        <td>Price 1</td>
+                        <td>Stock 1 </td>
+                        <td>Sold 1 </td>
+                        <td>Action 1 </td> 
+                    </tr>
+                    <tr>
+                        <td>Image 2 </td>
+                        <td>name 2 </td>
+                        <td>Writer 2 </td>
+                        <td>Publisher 2 </td>
+                        <td>Price 2</td>
+                        <td>Stock 2 </td>
+                        <td>Sold 1 </td>
+                        <td>Action 2 </td> 
+                    </tr>
+                    <tr>
+                        <td>Image 3 </td>
+                        <td>name 3 </td>
+                        <td>Writer 3 </td>
+                        <td>Publisher 3 </td>
+                        <td>Price 3</td>
+                        <td>Stock 3 </td>
+                        <td>Sold 1 </td>
+                        <td>Action 3 </td>
+                    </tr>
+
+                    <!-- ********error********** -->
+
+                    <!-- <% if(books.length > 0) { %>
+                        <% books.forEach(book = > { %>
+                            <td>Image</td>
+                            <td> <%= book.TITLE %> </td>
+                            <td> <%= book.WRITER_NAME %> </td>
+                            <td> <%= book.PUBLISHER %> </td>
+                            <td> <%= book.PRICE %> </td>
+                            <td> <%= book.STOCK %> </td>
+                            <td> <%= book.SOLD %> </td>
+                            <td> Action </td>
+                        <% }) %>
+                    <% } %>  -->
+
+                    
+
+                </table>    
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+
