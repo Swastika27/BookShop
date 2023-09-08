@@ -9,6 +9,7 @@ const adminAuth = require('../../middlewares/user_auth').adminAuth;
 const loginRouter = require('./authentication/login');
 router.use('/login', loginRouter);
 const orderRouter = require('../admin/adminOrder');
+const publisherRouter = require('../admin/adminPublisher');
 
 router.use(adminAuth);
 
@@ -18,5 +19,6 @@ router.get('/', require('./adminHome'));
 
 router.use('/logout', logoutRouter);
 router.use('/order', orderRouter);
+router.use('/publisher', publisherRouter);
 
 module.exports = router;

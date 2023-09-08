@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
         res.redirect('/admin/login');
     }
     const order_data = await DB_order.getAllOrders();
-    console.log(order_data);
+    // console.log(order_data);
     res.render('adminOrder.ejs', {
         title: 'Admin-orders',
         items: order_data

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styleAddBook.css">
+</head>
+<body>
+    <div class="form-container-1">
+        <div class="form-btn">
+            <span>Add Publisher</span>
+        </div>
+
+        <form action='/admin/publisher/add' method="POST">
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="email" placeholder="email" value=<%= email %>>
+            <input type="text" name="address" placeholder="Address" value=<%= address %>>
+             <button type="submit" class="btn1">Add publisher</button> 
+    
+        </form>
+
+    </div>
+</body>
+</html> 

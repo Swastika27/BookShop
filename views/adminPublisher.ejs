@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/styleHomepageAdmin.css">
+</head>
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+            <h1>BitLit Books</h1>
+        </div>
+        <ul>
+            <li><a href="/admin">Home</a></li>
+            <li><a href="/admin/book">Books</a> </li>
+            <li><a href="/admin/writer">Writers</a> </li>
+            <li><a href="/admin/publisher">Publishers</a> </li>
+            <li><a href="/admin/order">Orders</a> </li>
+            <li></li>
+            <li></li>
+            <li><a href="/admin/logout">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                 <div class="search-bar">
+                    <form action="/search" method="POST">
+                        <input type="text" name="search_text" placeholder="Search books...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div> 
+            </div>
+        </div>
+        <div class="content">
+            <div class="book-list">
+                <button style="width: max-content; margin-left: 10px;" onclick="location.assign('/admin/publisher/add');">Add publisher</button>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>No. of Writers</th>
+                        <th>No. of books</th>
+                        <th>Total sold</th>
+                        <!-- <th>Sold</th> -->
+                        <th>Action</th>
+                    </tr>
+                    <% if (items.length > 0) { %>
+                        <% for (let i = 0; i < items.length; i++) { %>
+                            <tr>
+                                <td><%= items[i].NAME %> </td>
+                                <td><%= items[i].EMAIL %></td>
+                                <td><%= items[i].ADDRESS %></td>
+                                <td><%= items[i].TOTAL_WRITER %></td>
+                                <td><%= items[i].TOTAL_BOOK %></td>
+                                <td><%= items[i].TOTAL_SOLD %></td>
+                                <!-- <td><%=  %></td> -->
+                                <td>
+                                    <a style="color: green;" href=<%= '/admin/publisher/edit/' + items[i].NAME %>>Edit</a><br>
+                                    <a style="color: red;" href=<%= '/admin/publisher/delete/' + items[i].NAME %>>Delete
+                                    </a>
+                                </td> 
+                            </tr>
+                        <% } %>
+                    <% } %>                    
+
+                </table>    
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+
