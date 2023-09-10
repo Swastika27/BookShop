@@ -17,6 +17,9 @@
             <li><a href="/admin/writer">Writers</a> </li>
             <li><a href="/admin/publisher">Publishers</a> </li>
             <li><a href="/admin/order">Orders</a> </li>
+            <li><br></li>
+            <li><br></li>
+            <li><a href="/admin/logout">Logout</a></li>
         </ul>
     </div>
     <div class="container">
@@ -32,9 +35,10 @@
         </div>
         <div class="content">
             <div class="book-list">
+                <button onclick="location.assign('/admin/book/add');" style="width: fit-content; margin-left: 10px">Add Book</button>
                 <table>
                     <tr>
-                        <th>Image</th>
+                        <th>Id</th>
                         <th>Name</th>
                         <th>Writer</th>
                         <th>Publisher</th>
@@ -43,36 +47,23 @@
                         <th>Sold</th>
                         <th>Action</th>
                     </tr>
-                    <tr>
-                        <td>Image 1 </td>
-                        <td>name 1 </td>
-                        <td>Writer 1 </td>
-                        <td>Publisher 1 </td>
-                        <td>Price 1</td>
-                        <td>Stock 1 </td>
-                        <td>Sold 1 </td>
-                        <td>Action 1 </td> 
-                    </tr>
-                    <tr>
-                        <td>Image 2 </td>
-                        <td>name 2 </td>
-                        <td>Writer 2 </td>
-                        <td>Publisher 2 </td>
-                        <td>Price 2</td>
-                        <td>Stock 2 </td>
-                        <td>Sold 1 </td>
-                        <td>Action 2 </td> 
-                    </tr>
-                    <tr>
-                        <td>Image 3 </td>
-                        <td>name 3 </td>
-                        <td>Writer 3 </td>
-                        <td>Publisher 3 </td>
-                        <td>Price 3</td>
-                        <td>Stock 3 </td>
-                        <td>Sold 1 </td>
-                        <td>Action 3 </td>
-                    </tr>                    
+                    <% for(let i = 0; i < items.length; i++) { %>
+                        <tr>
+                            <td><%= items[i].ID %></td>
+                            <td><%= items[i].TITLE %></td>
+                            <td><%= items[i].NAME %></td>
+                            <td><%= items[i].PUBLISHER %></td>
+                            <td><%= items[i].PRICE %></td>
+                            <td><%= items[i].QUANTITY_IN_STOCK %></td>
+                            <td><%= items[i].QUANTITY_SOLD %></td>
+                            <td>
+                                <a style="color: green;" href=<%= '/admin/book/edit/' + items[i].ID %>>Edit</a><br>
+                                <a style="color: red;" href=<%= '/admin/book/delete/' + items[i].ID %>>Delete
+                                </a>
+                            </td> 
+                        </tr>
+                    <% } %>
+                    
 
                 </table>    
             </div>

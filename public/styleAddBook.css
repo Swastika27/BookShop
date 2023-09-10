@@ -13,14 +13,14 @@ body {
 {
     background: radial-gradient(#fff, #6ecddd);
     width: 550px;
-    height: 650px;
+    height: fit-content;
     position: absolute;
     text-align: center;
     padding: 20px 0;
     /* margin-top: 100px; */
     margin-left: 350px;
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, .1);
-    border-radius: 10px;
+    border-radius: 4px;
 }
 
 .form-container span
@@ -30,13 +30,14 @@ body {
     padding: 0 10px;
     color: #020306;
     cursor: pointer;
-    width: 100px;
+    width: 200px;
     display: inline-block;
 }
 
 .form-container form 
 {
     max-width: 500px;
+    height: fit-content;
     padding: 0 20px;
     position: absolute;
     top: 60px;
@@ -44,11 +45,12 @@ body {
 
 form input
 {
-    width: 100%;
+    width: 300px;
     height: 40px;
     margin: 8px 0;
     padding: 0 8px;
     border: 1px solid #ccc;
+    display: inline;
 }
 
 form .btn1
@@ -77,7 +79,7 @@ form .btn1
     margin-top: 100px;
     margin-left: 350px;
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, .1);
-    border-radius: 10px;
+    border-radius: 4px;
 }
 
 .form-container-1 span
@@ -93,8 +95,15 @@ form .btn1
 
 .form-container-1 form 
 {
-    max-width: 500px;
+    max-width: 550px;
+    /* max-height: fit-content; */
+    height: max-content;
     padding: 0 20px;
     position: absolute;
     top: 70px;
+}
+
+label {
+    display: block;
+    width: max-content;
 }

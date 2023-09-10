@@ -5,12 +5,14 @@ const router = Router({mergeParams: true});
 
 router.get('/', async (req, res) => {
     if(req.publisher == null) {
-        return res.redirect('/publisher/login');
+        res.redirect('/publisher/login');
     }
+    const book_data = await DB_book.getAllBooksByPublisher(req.publisher.name);
 
     res.render('publisherHome.ejs', {
-        title: 'Home'
+        items: book_data
     });
 })
+
 
 module.exports = router;

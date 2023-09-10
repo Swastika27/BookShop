@@ -3,9 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publisher</title>
+    <title>Publisher Panel</title>
+    <link rel="stylesheet" href="/styleHomepageAdmin.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
-    Publisher Home
+    <div class="side-menu">
+        <div class="brand-name">
+            <h1>BitLit Books</h1>
+        </div>
+        <ul>
+            <li><a href="/publisher">Home</a></li>
+            <li><a href="/publisher/book">Books</a> </li>
+            <li><a href="/publisher/writer">Writers</a> </li>
+            <li><a href="/publisher/book/supplies">Supplies</a></li>
+            <br>
+            <br>
+            <li><a href="/publisher/logout">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                 <div class="search-bar">
+                    <form action="/search" method="POST">
+                        <input type="text" name="search_text" placeholder="Search books...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div> 
+            </div>
+        </div>
+        <div class="content">
+            <div class="book-list">
+                <button onclick="location.assign('/publisher/book/add');" style="width: fit-content; margin-left: 10px">Add Book</button>
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Writer</th>
+                        <th>Publisher</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Sold</th>
+                        <th>Action</th>
+                    </tr>
+                    <% for(let i = 0; i < items.length; i++) { %>
+                        <tr>
+                            <td><%= items[i].ID %></td>
+                            <td><%= items[i].TITLE %></td>
+                            <td><%= items[i].NAME %></td>
+                            <td><%= items[i].PUBLISHER %></td>
+                            <td><%= items[i].PRICE %></td>
+                            <td><%= items[i].QUANTITY_IN_STOCK %></td>
+                            <td><%= items[i].QUANTITY_SOLD %></td>
+                            <td>
+                                <a style="color: rgb(50, 105, 155); text-decoration: underline; cursor: pointer;" id=<%= 'supply-post' + items[i].ID %>> Add to supply</a><br>
+                                <a style="color: green;" href=<%= '/publisher/book/edit/' + items[i].ID %>>Edit</a><br>
+                                <a style="color: red;" href=<%= '/publisher/book/delete/' + items[i].ID %>>Delete
+                                </a>
+                            </td> 
+                        </tr>
+                    <% } %>
+                    
+
+                </table>    
+            </div>
+        </div>
+    </div>
+    
 </body>
+<script>
+    let items = <%- JSON.stringify(items) %>;
+    for(let i = 0; i < items.length; i++) {
+        document.getElementById(`supply-post${items[i].ID}`).onclick = (function (i) {
+            return function () {
+                $.ajax({
+                    url: `/publisher/book/supply/add/${items[i].ID}`,
+                    type: 'POST'
+                });
+            }
+        }) (i);
+    }
+</script>
 </html>
+
+

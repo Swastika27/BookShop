@@ -13,11 +13,20 @@
         </div>
 
         <form action=<%= '/admin/publisher/edit/' + name %> method="POST">
-            <%= name %>
-            <input type="text" name="email" value=<%= email %>>
-            <input type="text" name="address" placeholder="Address" value=<%= address %>>
-            <input type="text" name="name" value='<%= name%>' style="display: none;">
-             <button type="submit" class="btn1">Save changes</button> 
+            <div class="form-btn">
+                <span><%= name %></span>
+            </div>
+            <label>
+                Name:  <input type="text" name="email" value=<%= email %>>
+            </label>
+            <label>
+                Address:  <input type="text" name="address" placeholder="Address" value=<%= address %>>
+            </label>
+             <input type="text" name="name" value="<%= name%>" style="display: none;">
+            
+             <div class="form-btn">
+                <button type="submit" style="width: max-content;" class="btn1">Save changes</button> 
+            </div>
     
         </form>
 

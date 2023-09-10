@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply</title>
+    <link rel="stylesheet" href="/styleCart.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <!-- <h3>Cart</h3> -->
+    <div class="small-container cart-page">
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+            
+            <% let sum = 0; %>
+                <% if (items.length > 0) { %>
+                    <% for(let i = 0; i < items.length; i++) { %>
+                        <% sum = sum + items[i].PRICE * items[i].QUANTITY; %>
+                        <tr>
+                            <td>
+                                <div class="cart-info">
+                                    <img src="images/Kalbela.jpg" alt="Product image" width="60px" height="80px">
+                                    <div>
+                                        <p><%= items[i].TITLE %></p>
+                                        <a href=<%= '/supply/delete/' + items[i].ID %>>Remove</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <input class="book-price" type="text" id=<%= 'book-price' + i %> value="<%=items[i].PRICE  %>"> Tk.
+
+                            </td>
+                            <td>
+                                <button class="rmv-btn" id=<%= 'rmv-btn' + i %>>-</button>
+                                <input class="book-qty" type="text" id=<%= 'input' + i %> value="<%=items[i].QUANTITY  %>">
+                                <button class="add-btn" id=<%= 'add-btn' + i %>>+</button>
+                            </td>
+                            <td id= <%= 'price' + i %>><%= items[i].AMOUNT %> Tk.
+                            </td>
+                        </tr>
+                        
+                    <% } %>
+                <%}%>
+        </table>
+
+         <div>
+            <button class="save" id="action-btn" onclick="sendUpdate();">Save Changes</button>
+            <button class="order" id="action-btn" onclick="sendUpdate(); sendSupply();
+            location.assign('/publisher/book/supplies')">Supply</button>
+         </div>             
+
+    </div> 
+    <div class="summary">
+        <table>
+            <tr>
+                <td>
+                    Subtotal: 
+                </td>
+                <td class="subtotal" id="subtotal">
+                    <%= sum %>Tk.
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        let total = 0;
+        let items = <%- JSON.stringify(items) %> ;
+        console.log(items);
+        const btn = document.getElementById(`add-btn0`);
+        console.log(btn);
+
+        for (let i = 0; i < items.length; i++) {
+            console.log(i);
+            total += items[i].PRICE * items[i].QUANTITY;
+            document.getElementById(`add-btn${i}`).onclick = (function (i) {
+                return function() {
+                    console.log(items[i]);
+                    total -= items[i].QUANTITY * items[i].PRICE;
+                    items[i].QUANTITY = Math.min(items[i].QUANTITY + 1, 5);
+                    document.getElementById(`input${i}`).value = items[i].QUANTITY;
+                    total += items[i].QUANTITY * items[i].PRICE;
+                    document.getElementById(`price${i}`).innerText = "Tk. " + items[i].QUANTITY* items[i].PRICE;
+                    console.log('add button');
+                    updateTotals(total);
+                };
+            }) (i);
+            document.getElementById(`rmv-btn${i}`).onclick = (function (i) {
+                return function() {
+                    total -= items[i].QUANTITY * items[i].PRICE;
+                    items[i].QUANTITY = Math.max(items[i].QUANTITY - 1, 1);
+                    document.getElementById(`input${i}`).value = items[i].QUANTITY;
+                    total += items[i].QUANTITY * items[i].PRICE;
+                    document.getElementById(`price${i}`).innerText = "Tk. " + items[i].QUANTITY* items[i].PRICE;
+                    updateTotals(total);
+                }
+            }) (i);
+            document.getElementById(`book-price${i}`).oninput = ( function (i) {
+                return function() {
+                    console.log('abc');
+                    total -= items[i].QUANTITY * items[i].PRICE;
+                    // console.log(document.getElementById(`book-price${i}`).value);
+                    items[i].PRICE = Number(document.getElementById(`book-price${i}`).value);
+                    total += items[i].QUANTITY * items[i].PRICE;
+                    document.getElementById(`price${i}`).innerText = "Tk. " + items[i].QUANTITY* items[i].PRICE;
+
+                    console.log(items[i].PRICE);
+                    updateTotals(total);
+                }
+            }) (i)
+        }
+
+        function updateTotals(total) {
+            document.getElementById('subtotal').innerText = total + 'Tk.';
+        }
+
+        updateTotals(total);
+
+        function sendUpdate() {
+            $.ajax ( {
+                url: `/publisher/book/supply/update/${items[0].SUPPLY_ID}`,
+                type: 'POST',
+                data: {items: JSON.stringify(items)},
+                // status code and toast
+            });
+        }
+
+        function sendSupply() {
+            $.ajax({
+                url: `/publisher/book/supply/${items[0].SUPPLY_ID}`,
+                type: 'POST'
+            })
+        }
+        
+    </script>
+</body>
+</html>

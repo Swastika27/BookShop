@@ -81,7 +81,7 @@ function publisherAuth(req, res, next) {
                 const decodedId = decoded.email; // publisher email
 
                 let results = await DB_auth_publisher.getInfoFromEmail(decodedId);
-                console.log(results);
+                // console.log(results);
 
                 if(results.length == 0) {
                     next();

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/styleHomepageAdmin.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+            <h1>BitLit Books</h1>
+        </div>
+        <ul>
+            <li><a href="/admin">Home</a></li>
+            <li><a href="/admin/book">Books</a> </li>
+            <li><a href="/admin/publisher">Publishers</a> </li>
+            <li><a href="/admin/supplies">Supplies</a></li>
+            <li><a href="/admin/order">Orders</a> </li>
+            <br>
+            <br>
+            <li><a href="/admin/logout">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                 <div class="search-bar">
+                    <form action="/search" method="POST">
+                        <input type="text" name="search_text" placeholder="Search books...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div> 
+            </div>
+        </div>
+        <div class="content">
+            <div class="book-list">
+                <button onclick="updateStatus();" style=" margin-left:10px; width: fit-content;"> Save Changes</button>
+
+                <!-- <button onclick="location.assign('/publisher/book/add');" style="width: fit-content; margin-left: 10px">Add Book</button> -->
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Total Quantity</th>
+                        <th>Total Amount</th>
+                        <th>Date Supplied</th>
+                        <th>Payment Status</th>
+                    </tr>
+                    <% for(let i = 0; i < items.length; i++) { %>
+                        <tr>
+                            <td><a href="/admin/book/supplies/<%= items[i].SUPPLY_ID %>"><%= items[i].SUPPLY_ID %></a></td>
+                            <td><%= items[i].TOTAL_QUANTITY %></td>
+                            <td><%= items[i].TOTAL_AMOUNT %></td>
+                            <td><%= items[i].DATE_SUPPLIED %></td>
+                            <td>
+                                <!-- <%= items[i].DATE_DELIVERED %>  -->
+                                <select id=<%= 'payment-status' + items[i].SUPPLY_ID %>> 
+                                    <% if (items[i].PAYMENT_STATUS !== 'pending') { %>
+                                        <option value="paid" selected>Paid</option>
+                                        <option value="pending">Pending</option>
+                                    <% } else { %>
+                                        <option value="pending" selected>Pending</option>
+                                        <option value="paid">Paid</option>
+                                    <% } %>
+                                </select>
+                            </td>
+                        </tr>
+                    <% } %>
+                    
+
+                </table>    
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script>
+    let items = <%- JSON.stringify(items) %>;
+    for(let i = 0;i < items.length; i++) {
+            console.log(i);
+            document.getElementById(`payment-status${items[i].SUPPLY_ID}`).onchange = (function (i) {
+                return function () {
+                    console.log(document.getElementById(`payment-status${items[i].SUPPLY_ID}`));
+                    items[i].PAYMENT_STATUS = document.getElementById(`payment-status${items[i].SUPPLY_ID}`).value;
+                    console.log(items[i].PAYMENT_STATUS);
+                }
+            }) (i);
+        }
+
+        function updateStatus() {
+            $.ajax ( {
+                url: `/admin/supplies/update`,
+                type: 'POST',
+                data: {
+                    items: JSON.stringify(items)
+                }
+            });
+        }
+</script>
+</html>

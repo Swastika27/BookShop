@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit book</title>
+    <link rel="stylesheet" href="/styleAddBook.css">
+</head>
+
+<body>
+    <div class="form-container">
+        <div class="form-btn">
+            <span>Edit Book</span>
+        </div>
+
+        <form action=<%="/admin/book/edit/" + id %> method="POST">
+
+            <label>
+                Book title <input type="text" placeholder="Book Title" name="title" value="<%= title %>" required>
+            </label>
+            <label>
+                Writer <input type="text" placeholder="Writer Name" name="writer_name" value="<%= writer %>" required>
+            </label>
+            <label>
+                Publisher <input type="text" placeholder="Publisher Name" name="publisher" value="<%= publisher %>"
+                    required>
+            </label>
+            <label>
+                Publication Year <input type="text" placeholder="Date Published" name="publish_date"
+                    value=<%=date_published %> required>
+            </label>
+            <label>
+                Genre <input type="text" placeholder="Genre" name="genre" value="<%= genre %>" required>
+            </label>
+            <label>
+                Quantity in Stock <input type="text" placeholder="In Stock" value=<%=stock %> name="in_stock" required>
+            </label>
+            <label>
+                Price <input type="text" placeholder="Price" name="price" value=<%=price %> required>
+            </label>
+            <label>
+                Language <input type="text" placeholder="Language" name="language" value=<%=language %> required>
+            </label>
+            <label>
+                Page count <input type="text" placeholder="Total Page" name="page" value=<%=page %> required>
+            </label>
+
+            <div class="errors" style="color: red;">
+                <% if (errors.length> 0 ) { %>
+                    <% errors.forEach(err=> { %>
+                        <br>
+                        <%= err %>
+                            <% }) %>
+                                <% } %>
+            </div>
+
+
+            <button type="submit" class="btn1">Confirm</button>
+
+        </form>
+
+
+
+    </div>
+</body>
+
+</html>
