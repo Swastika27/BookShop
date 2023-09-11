@@ -200,3 +200,19 @@ div .single-book-details {
     margin: 20px;
 }
 
+.rating input {
+    display: none;
+}
+.rating label {
+    float: right;
+    cursor: pointer;
+    color: #333;
+}
+.rating label:before {
+    content: '\2605';
+    font-size: 50px;
+}
+.rating input:checked~label {
+    color: gold;
+}
+

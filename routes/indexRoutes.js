@@ -13,6 +13,7 @@ const homepage_router = require('./homepageRoutes');
 
 const cart_router = require('./cartRoutes');
 const wishlist_router = require('./wishListRoutes');
+const rating_router = require("./ratingRoutes");
 
 const search_router = require('./searchRoutes');
 const filter_router = require('./filterRoutes');
@@ -58,6 +59,7 @@ router.use('/filter', filter_router);
 
 router.use('/cart', cart_router);
 router.use('/wishlist', wishlist_router);
+router.use('/rating', rating_router);
 
 module.exports = router;
 

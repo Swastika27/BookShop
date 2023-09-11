@@ -13,7 +13,7 @@ async function getAllGenre() {
 }
 
 async function getBookById(id) {
-    const query = `SELECT Book.ID, Book.title, Book.GENRE, BOOK.QUANTITY_IN_STOCK,Book.Publisher, BOOK.PRICE, BOOK.DATE_PUBLISHED, Book.PAGE, WRITER.NAME AS WRITER_NAME FROM BOOK , WRITER
+    const query = `SELECT Book.ID, Book.title, Book.GENRE, BOOK.RATING, BOOK.QUANTITY_IN_STOCK,Book.Publisher, BOOK.PRICE, BOOK.DATE_PUBLISHED, Book.PAGE, WRITER.NAME AS WRITER_NAME FROM BOOK , WRITER
     WHERE (BOOK.id = :id) AND (BOOK.WRITER_ID = WRITER.id )`;
     const binds = {
         id

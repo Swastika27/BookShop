@@ -51,6 +51,7 @@
                     </div> 
                     <div class="single-book-info">
                         <h2><%= book.TITLE %></h2>
+                        <P><%= book.RATING %> ⭐</P>
                         <p>Writer: <%= book.WRITER_NAME %></p>
                         <p>Genre: <%= book.GENRE %></p>
                         <p>Total page: <%= book.PAGE %></p>
@@ -97,6 +98,21 @@
                         
                 <% }) %>
             <% } %>
+        </div>
+
+        <div class="section-header">
+            <div class="rating">Rate this book 
+                <input type="radio" name="rating" id="star5" value="5">
+                <label for="star5"></label>
+                <input type="radio" name="rating" id="star4" value="4">
+                <label for="star4"></label>
+                <input type="radio" name="rating" id="star3" value="3">
+                <label for="star3"></label>
+                <input type="radio" name="rating" id="star2" value="2">
+                <label for="star2"></label>
+                <input type="radio" name="rating" id="star1" value="1">
+                <label for="star1"></label>
+            </div>
         </div>
     </div>
 
@@ -153,6 +169,36 @@
         catch(err) {
             console.log(err);
         }
+        })
+
+        async function sendRating(r) {
+            try {
+                const res = await fetch(`/rating/${id}`, {
+                    method: 'POST', 
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ratings: r})
+                })
+
+                const data = await res.json();
+                console.log(data);
+                if(data.user == null) {
+                    location.assign('/login');
+                }
+                else {
+                    console.log('success! adding');
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        const ratings = document.querySelectorAll('.rating input');
+        ratings.forEach(rating => {
+            rating.addEventListener('change', () => {
+                const selectedRating = rating.value;
+                console.log(Number(selectedRating)) 
+                sendRating(Number(selectedRating));
+            })
         })
         
     </script>
