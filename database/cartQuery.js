@@ -47,25 +47,38 @@ async function isAlreadyAdded(customer_id, book_id) {
 }
 
 async function addToCart(customer_id, book_id) {
-    const carts = await getActiveCart(customer_id);
-    console.log(carts);
-    const cartId = carts[0].ID;
-    console.log(cartId);
-    if(cartId !== null) {
-        const query = `INSERT INTO CARTITEMS(CART_ID, BOOK_ID) VALUES (:c_id, :b_id)`;
-        binds = {
-            c_id: cartId,
-            b_id: book_id
-        };
-        console.log('query, ', query);
-        console.log('binds', binds);
-        console.log('options ', database.options);
-        const updateResult = await database.execute(query, binds, database.options);
-        console.log('added to cadrt');
-        return;
+    // const carts = await getActiveCart(customer_id);
+    // console.log(carts);
+    // const cartId = carts[0].ID;
+    // console.log(cartId);
+    // if(cartId !== null) {
+    //     const query = `INSERT INTO CARTITEMS(CART_ID, BOOK_ID) VALUES (:c_id, :b_id)`;
+    //     binds = {
+    //         c_id: cartId,
+    //         b_id: book_id
+    //     };
+    //     console.log('query, ', query);
+    //     console.log('binds', binds);
+    //     console.log('options ', database.options);
+    //     const updateResult = await database.execute(query, binds, database.options);
+    //     console.log('added to cadrt');
+    //     return;
+    // }
+    // else {
+    //     console.log('cart not found');
+    // }
+
+    const query = `BEGIN 
+                    ADD_TO_CART(:CUSTOMER_ID, :BOOK_ID);
+                    END;`
+    const binds = {
+        customer_id,
+        book_id
     }
-    else {
-        console.log('cart not found');
+    try {
+        await database.execute(query, binds, database.options);
+    } catch (err) {
+        console.log(err);
     }
 }
 
@@ -74,7 +87,14 @@ async function getCartAllInfoFromId(user_id) {
                     FROM CARTITEMS JOIN BOOK ON (CARTITEMS.BOOK_ID = BOOK.ID)
                     JOIN WRITER ON (BOOK.WRITER_ID = WRITER.ID) 
                     JOIN CARTCUSTOMERS ON (CARTITEMS.Cart_ID = CARTCUSTOMERS.ID AND CARTCUSTOMERS.ISACTIVE LIKE 'y')
-                    WHERE CARTCUSTOMERS.CUSTOMER_ID = :ID`;
+                    WHERE CARTCUSTOMERS.CUSTOMER_ID = :ID 
+                    union (
+                        SELECT Bookbackup.ID, BOOKbackup.TITLE, WRITER.NAME, BOOKbackup.PRICE, Bookbackup.QuantiTY_IN_STOCK as Stock, CARTITEMS.QUANTITY
+                    FROM CARTITEMS JOIN BOOKbackup ON (CARTITEMS.BOOK_ID = BOOKbackup.ID)
+                    JOIN WRITER ON (BOOKbackup.WRITER_ID = WRITER.ID) 
+                    JOIN CARTCUSTOMERS ON (CARTITEMS.Cart_ID = CARTCUSTOMERS.ID AND CARTCUSTOMERS.ISACTIVE LIKE 'y')
+                    WHERE CARTCUSTOMERS.CUSTOMER_ID = :ID
+                    )`;
     const binds = {
         ID: user_id
     }

@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
     }
     else {
         const cartData = await Db_cart.getCartAllInfoFromId(req.user.id);
-        console.log(cartData);
+        // console.log(cartData);
         res.render('cart', {
             cartItems: cartData
         });
@@ -53,14 +53,15 @@ router.post('/:id', async(req, res) => {
     if(hasCart.length === 0) {
         Db_cart.assignNewCart(req.user.id);
     }
-    const isAdded = await Db_cart.isAlreadyAdded(req.user.id, req.params.id);
-    console.log('isadded', isAdded);
-    if(isAdded == null) {
+    // const isAdded = await Db_cart.isAlreadyAdded(req.user.id, req.params.id);
+    // console.log('isadded', isAdded);
+    try {
         console.log('addin to cart');        
         await Db_cart.addToCart(req.user.id, req.params.id);
         return res.sendStatus(200);
     }
-    else {
+    catch(err) {
+        console.log(err);
         return res.sendStatus(204);
     }
 })

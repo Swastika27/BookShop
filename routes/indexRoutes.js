@@ -36,8 +36,13 @@ router.get('/homepage', async(req, res) => {
     const all_books = await bookQuery.getAllBooks();
     const all_genre = await bookQuery.getAllGenre();
     const all_authors = await bookQuery.getAllAuthors();
+    const recc = await bookQuery.getRecommendation(req.user.id);
+    // console.log(recc);
+    const difference = all_books.filter(item => !recc.includes(item));
+    const final_list = recc.concat(difference);
+    // console.log(final_list);
     res.render('homepage.ejs', {
-        books: all_books,
+        books: final_list,
         genres: all_genre,
         authors: all_authors
     });

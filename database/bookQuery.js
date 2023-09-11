@@ -219,6 +219,37 @@ async function getSameAuthorDiffGenreBooks(book_id) {
     return (await database.execute(query, binds, database.options)).rows;
 }
 
+async function getRecommendation(c_id) {
+    const query = `select book.id as id, title, publisher, writer.name as writer_name
+    from book join writer 
+    on (book.writer_id = writer.id) 
+    where genre in (
+        SELECT genre 
+    FROM CARTCUSTOMERS JOIN CARTITEMS ON CARTCUSTOMERS.ID = CARTITEMS.CART_ID
+    JOIN BOOK ON BOOK.ID = CARTITEMS.BOOK_ID
+    where CARTCUSTOMERS.CUSTOMER_ID = :c_id
+    GROUP BY CARTCUSTOMERS.CUSTOMER_ID, GENRE
+    ORDER BY COUNT( GENRE) desc
+    FETCH FIRST 1 ROW ONLY
+    ) 
+    minus 
+    (
+        select book.id as id, title, publisher, writer.name as writer_name
+    from book join writer 
+    on (book.writer_id = writer.id)
+    where book.id in (
+        SELECT cartitems.book_id 
+    FROM CARTCUSTOMERS JOIN CARTITEMS ON CARTCUSTOMERS.ID = CARTITEMS.CART_ID
+    JOIN BOOK ON BOOK.ID = CARTITEMS.BOOK_ID
+    where CARTCUSTOMERS.CUSTOMER_ID = :c_id
+    ) 
+    )`;
+    const binds = {
+        c_id
+    }
+    return (await database.execute(query, binds, database.options)).rows;
+}
+
 module.exports = {
     getAllBooks,
     getBookById,
@@ -230,5 +261,6 @@ module.exports = {
     getBooksByAuthorFilter,
     getSameGenreBooks,
     getSameAuthorDiffGenreBooks,
-    getBooksByFilter
+    getBooksByFilter,
+    getRecommendation
 }
