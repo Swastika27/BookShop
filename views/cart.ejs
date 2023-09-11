@@ -23,10 +23,11 @@
                 <% if (cartItems.length > 0) { %>
                     <% for(let i = 0; i < cartItems.length; i++) { %>
                         <% sum = sum + cartItems[i].PRICE; %>
+                        <% const imgSrc = `${cartItems[i].ID}.jpg`; %>
                         <tr>
                             <td>
                                 <div class="cart-info">
-                                    <img src="images\Kalbela.jpg" alt="Product image" width="60px" height="80px">
+                                    <img src="/images/<%= imgSrc %>" alt="Product image" width="60px" height="80px">
                                     <div>
                                         <p><%= cartItems[i].TITLE %></p>
                                         <a href=<%= '/cart/delete/' + cartItems[i].ID %>>Remove</a>

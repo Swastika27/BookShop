@@ -70,9 +70,10 @@
             <div class="display-books">
                 <% if(books.length > 0) { %>
                     <% books.forEach(book => { %>
+                        <% const imgSrc = `${book.ID}.jpg` %>
                         <div class="single-book">
                             <a href="/books/<%= book.ID %>">
-                                <img src="/images/Kalbela.jpg" alt="default" width="150" height="200">
+                                <img src="/images/<%= imgSrc %>" alt="default" width="150" height="200">
                                 <h4><%= book.TITLE %></h4>
                                 <p><%= book.WRITER_NAME %></p>
                                 <p><%= book.PUBLISHER %></p></a>

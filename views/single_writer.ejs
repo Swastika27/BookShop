@@ -40,11 +40,13 @@
                 <% let count = 0; %>
                 <div class="all-books-line">
                     <% books.forEach(book => { %>
+                        
+                        <% const imgSrc = `${book.ID}.jpg` %>
                              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                             <a href="/books/<%= book.ID %>">
                             <br>
                             <br>
-                            <img src="/images/Kalbela.jpg" alt="default" width="150" height="200">
+                            <img src="/images/<%= imgSrc %>" alt="default" width="150" height="200">
                             <h4><%= book.TITLE %></h4>
                             <p><%= book.WRITER_NAME %></p>
                             <p><%= book.PUBLISHER %></p></a>   

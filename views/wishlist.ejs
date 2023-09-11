@@ -22,10 +22,11 @@
             
                 <% if (items.length > 0) { %>
                     <% for(let i = 0; i < items.length; i++) { %>
+                        <% const imgSrc = `${items[i]>ID}.jpg`; %>
                         <tr>
                             <td>
                                 <div class="cart-info">
-                                    <img src="images\Kalbela.jpg" alt="Product image" width="60px" height="80px">
+                                    <img src="/images/<%= imgSrc %>" alt="Product image" width="60px" height="80px">
                                     <div>
                                         <p><%= items[i].TITLE %></p>
                                         <a href=<%= '/wishlist/delete/' + items[i].ID %>>Remove</a>

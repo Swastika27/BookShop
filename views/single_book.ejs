@@ -46,8 +46,9 @@
         <div class="single-book-details">
             <% if(books.length > 0) { %>
                 <% books.forEach(book => { %>
+                    <% const imgSrc = `${book.ID}.jpg` %>
                     <div class="single-book-img">
-                        <img src="/images/Kalbela.jpg" alt="kalbela" width="240" height="320"> 
+                        <img src="/images/<%= imgSrc %>" alt="kalbela" width="240" height="320"> 
                     </div> 
                     <div class="single-book-info">
                         <h2><%= book.TITLE %></h2>
@@ -71,9 +72,10 @@
         <div class="display-books">
             <% if(genreBooks.length > 0) { %>
                 <% genreBooks.forEach(book => { %>
+                    <% const imgSrc = `${book.ID}.jpg` %>
                     <div class="single-book">
                         <a href="/books/<%= book.ID %>">
-                            <img src="/images/Kalbela.jpg" alt="default" width="150" height="200">
+                            <img src="/images/<%= imgSrc %>" alt="default" width="150" height="200">
                             <h4><%= book.TITLE %></h4>
                             <p><%= book.WRITER_NAME %></p>
                             <p><%= book.PUBLISHER %></p></a>
@@ -87,9 +89,10 @@
         <div class="display-books">
             <% if(writerBooks.length > 0) { %>
                 <% writerBooks.forEach(book => { %>
+                    <% const imgSrc = `${book.ID}.jpg` %>
                     <div class="single-book">
                         <a href="/books/<%= book.ID %>">
-                            <img src="/images/Kalbela.jpg" alt="default" width="150" height="200">
+                            <img src="/images/<%= imgSrc %>" alt="default" width="150" height="200">
                             <h4><%= book.TITLE %></h4>
                             <p><%= book.WRITER_NAME %></p>
                             <p><%= book.PUBLISHER %></p>

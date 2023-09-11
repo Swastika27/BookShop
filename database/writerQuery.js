@@ -1,3 +1,5 @@
+const OracleDB = require('oracledb');
+
 const database = require('./database');
 
 async function getAllWriterInfoByPublisher(p_name) {
@@ -29,15 +31,21 @@ async function addWriter(w_name, description) {
                     end;`;
     const binds = {
         w_name,
-        description
+        description, 
+        output: {
+            dir: OracleDB.BIND_OUT,
+            type: OracleDB.STRING
+        }
     }
     try {
-        return (await database.execute(query, binds, database.options)).rows;
+        const result =  (await database.execute(query, binds, database.options)).rows;
+        return result.outBinds.BIND_OUT;
     } catch(err) {
         console.log(err);
     }
 }
 
 module.exports = {
-    getAllWriterInfoByPublisher
+    getAllWriterInfoByPublisher,
+    addWriter
 };

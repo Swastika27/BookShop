@@ -25,4 +25,22 @@ router.get('/add', async(req, res) => {
     }
 })
 
+router.post('/add', async (req, res) => {
+    if(req.publisher == null) {
+        res.redirect('/publisher/writer');
+    }
+    else {
+        const result = DB_writer.addWriter(req.body.writer_name, req.body.description);
+        if(result !== 'OKAY') {
+            res.render('publisherAddWriter.ejs', {
+                form: {
+                    name: req.body.name,
+                    description: req.body.description
+                },
+                errors: result
+            })
+        }
+    }
+})
+
 module.exports = router;
