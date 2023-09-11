@@ -87,7 +87,12 @@ async function deleteBook(id) {
     const binds = {
         id
     }
-    await database.execute(query, binds, database.options);
+    try {
+        await database.execute(query, binds, database.options);
+    } catch(err) {
+        console.log(err.Error.errorNum);
+    }
+    
 }
 
 module.exports = {

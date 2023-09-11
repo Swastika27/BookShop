@@ -6,6 +6,7 @@ const DB_publisher = require('../../../database/publisherAuthQuery');
 const router = Router({mergeParams: true});
 
 router.get('/', (req, res) => {
+    console.log('publisher login');
     if(req.publisher == null) {
         console.log('i publisher null');
         // console.log(req);

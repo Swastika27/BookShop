@@ -81,10 +81,26 @@ async function sendSupply(s_id) {
     }
 }
 
+async function deleteBookFromSupply(p_name, b_id) {
+    const query = `BEGIN 
+                    DELETE_FROM_SUPPLY(:P_name, :b_id);
+                    end;`;
+    const binds = {
+        p_name,
+        b_id
+    }
+    try {
+        await database.execute(query, binds, database.options);
+    } catch(err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     addToSupply, 
     getAllSupplies,
     getSupplyAllData,
     updateSupplyData,
-    sendSupply
+    sendSupply,
+    deleteBookFromSupply
 }
